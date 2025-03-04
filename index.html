@@ -19,6 +19,26 @@
             width: 80%;
             height: 400px;
         }
+        .slogan {
+            text-align: center;
+            font-size: 1.5em;
+            margin-top: 20px;
+            color: #f39c12;
+            font-weight: bold;
+        }
+        .btn-promociones {
+            display: inline-block;
+            background-color: #2ecc71;
+            color: white;
+            padding: 12px 20px;
+            font-size: 1em;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .btn-promociones:hover {
+            background-color: #27ae60;
+        }
     </style>
 </head>
 <body>
@@ -46,6 +66,11 @@
         </div>
     </section>
 
+    <!-- Slogan -->
+    <section class="slogan">
+        <p>¡La tecnología que necesitas, al alcance de tu mano!</p>
+    </section>
+
     <!-- Contador de visitas -->
     <section id="counter">
         <div id="visit-count">
@@ -65,6 +90,11 @@
     <!-- Buscador -->
     <section class="buscador">
         <input type="text" id="search-input" placeholder="Buscar producto..." oninput="buscarProducto()">
+    </section>
+
+    <!-- Botón para descargar promociones -->
+    <section class="download-section" style="text-align: center;">
+        <a href="promociones.pdf" class="btn-promociones" download="promociones">Descargar Promociones</a>
     </section>
 
     <!-- Productos -->
@@ -137,4 +167,3 @@
     <script src="scripts.js"></script>
 </body>
 </html>
-
