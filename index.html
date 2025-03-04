@@ -47,9 +47,11 @@
     <!-- Carrito -->
     <section id="carrito" class="carrito">
         <h2>Tu Carrito</h2>
-        <div id="carrito-items"></div>
-        <div id="total-carrito">
-            <p>Total: $<span id="total-price">0</span></p>
+        <div id="carrito-items" class="carrito-items">
+            <!-- Aquí aparecerán los productos del carrito -->
+        </div>
+        <div id="total-carrito" class="total">
+            <p>Total: Q<span id="total-price">0.00</span></p>
             <button onclick="limpiarCarrito()">Limpiar Carrito</button>
             <button onclick="finalizarCompra()">Finalizar Compra</button>
         </div>
@@ -81,14 +83,11 @@
             </div>
             <div class="form-group">
                 <label class="checkbox-label">
-                    <input type="checkbox" name="terminos" required>
-                    Acepto los <a href="#" class="link-terminos">términos y condiciones</a>
+                    <input type="checkbox" name="terminos" required> Acepto los <a href="#" class="link-terminos">términos y condiciones</a>
                 </label>
             </div>
             <button type="submit" class="btn-submit">Enviar</button>
         </form>
-    
-    
     </section>
 
     <!-- Footer -->
@@ -99,3 +98,4 @@
     <script src="scripts.js"></script>
 </body>
 </html>
+

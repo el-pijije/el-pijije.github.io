@@ -1,4 +1,5 @@
 /* General Styles */
+*/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -136,6 +137,30 @@ body {
     text-align: center;
 }
 
+.carrito h2 {
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.carrito-items {
+    margin-bottom: 30px;
+}
+
+.carrito-item {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.carrito-item p {
+    font-size: 16px;
+}
+
 .carrito button {
     background-color: #ff6600;
     padding: 10px 20px;
@@ -143,6 +168,18 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 20px;
+}
+
+/* Total Section */
+#total-carrito {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 18px;
 }
 
 /* Footer */
@@ -152,6 +189,7 @@ footer {
     text-align: center;
     padding: 15px 0;
 }
+
 /* Contact Form Styles */
 .contacto {
     background-color: #fff;
@@ -243,5 +281,23 @@ footer {
 
     .btn-submit {
         font-size: 14px;
+    }
+
+    .product-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-card {
+        width: 90%;
+    }
+
+    .carrito-items {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    #total-carrito {
+        font-size: 16px;
     }
 }
