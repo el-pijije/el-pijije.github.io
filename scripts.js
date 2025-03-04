@@ -1,10 +1,11 @@
+
 // Productos (para simular 50 productos)
 // Productos (con nombres reales)
 // Productos (con nombres reales, precios en quetzales y enlaces de imágenes)
 const productos = [
     { id: 1, nombre: 'Apple MacBook Air M2', precio: '7,799.99', imagen: 'https://istore.gt/wp-content/uploads/2022/07/EC00136iii-8.jpg' },
-    { id: 2, nombre: 'Dell XPS 13', precio: '7,199.99', imagen: 'https://i.dell.com/sites/csimages/Video_Imagery/en-us/XPS_13_9305_hero_1.jpg' },
-    { id: 3, nombre: 'HP Spectre x360', precio: '10,099.99', imagen: 'https://www.hp.com/us-en/shop/app/assets/images/product/x360-13-aw-hero-01.jpg' },
+    { id: 2, nombre: 'Dell XPS 13', precio: '7,199.99', imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7W8V7ZH-MxUUC715z5H9gaHvTdJlBVXEcYw&s' },
+    { id: 3, nombre: 'HP Spectre x360', precio: '10,099.99', imagen: 'https://img.pacifiko.com/PROD/resize/1/1000x1000/ODE0MjYxOW_3_167.jpg' },
     { id: 4, nombre: 'Lenovo ThinkPad X1 Carbon', precio: '10,399.99', imagen: 'https://www.lenovo.com/medias/lenovo-laptops-thinkpad-x1-carbon-gen-9-laptop-hero.png?context=bWFzdGVyfGltYWdlc3wzMzMzOHxpbWFnZS9wbmcvbWluZy9oNTY5L2gyNy9oYmQ5L2gyNi9oZmQ3L2hmYS9oMmM4LzQzNTgxNTgzX19jcnBfcXVhY2hldS5wbmc&f=original' },
     { id: 5, nombre: 'Asus ROG Zephyrus G14', precio: '11,299.99', imagen: 'https://rog.asus.com/media/18390/rog-zephyrus-g14-2021-hero.png' },
     { id: 6, nombre: 'Microsoft Surface Laptop 4', precio: '8,499.99', imagen: 'https://www.microsoft.com/en-us/surface/devices/surface-laptop-4/media/surface-laptop-4-hero.jpg' },
@@ -56,10 +57,11 @@ const productos = [
 
 let carrito = [];
 
-// Function to display products
+// Función para mostrar productos con el nuevo diseño del botón
 function mostrarProductos() {
     const productosList = document.getElementById('productos-list');
-    productosList.innerHTML = '';
+    productosList.innerHTML = ''; // Limpiar el contenedor de productos
+
     productos.forEach(producto => {
         const productCard = document.createElement('div');
         productCard.classList.add('product-card');
@@ -67,20 +69,35 @@ function mostrarProductos() {
             <img src="${producto.imagen}" alt="${producto.nombre}">
             <h3>${producto.nombre}</h3>
             <p>Q${producto.precio}</p>
-            <button class="btn" onclick="agregarAlCarrito(${producto.id})">Agregar al Carrito</button>
+            <button class="btn" id="agregar-btn-${producto.id}" onclick="agregarAlCarrito(${producto.id})">Agregar al Carrito</button>
         `;
         productosList.appendChild(productCard);
     });
 }
 
-// Function to add product to the cart
+// Función para agregar productos al carrito con animación y cambio de texto en el botón
 function agregarAlCarrito(id) {
     const producto = productos.find(prod => prod.id === id);
     carrito.push(producto);
     actualizarCarrito();
+
+    // Cambiar el texto y estilo del botón de "Agregar al carrito" a "Agregado"
+    const boton = document.getElementById(`agregar-btn-${id}`);
+    boton.innerText = "Agregado";
+    boton.classList.add('added');
+    
+    // Deshabilitar el botón por unos segundos (para evitar que el usuario haga clic varias veces)
+    boton.disabled = true;
+
+    // Volver a poner el botón en su estado original después de 2 segundos
+    setTimeout(() => {
+        boton.innerText = "Agregar al Carrito";
+        boton.classList.remove('added');
+        boton.disabled = false;
+    }, 2000);
 }
 
-// Function to update cart display
+// Función para actualizar el carrito (como antes)
 function actualizarCarrito() {
     const carritoCount = document.getElementById('carrito-count');
     const carritoItems = document.getElementById('carrito-items');
@@ -96,36 +113,44 @@ function actualizarCarrito() {
             <p>${item.nombre} - Q${item.precio}</p>
         `;
         carritoItems.appendChild(itemCarrito);
-        // Convert price string to number and sum it
-        total += parseFloat(item.precio.replace(/,/g, '')); // Removing commas and converting to float
+        total += parseFloat(item.precio.replace(/,/g, ''));
     });
 
-    totalPrice.textContent = total.toFixed(2); // Show total with two decimal places
+    totalPrice.textContent = total.toFixed(2);
 }
 
-// Function to clear the cart
+// Función para eliminar productos del carrito
+function eliminarDelCarrito(index) {
+    carrito.splice(index, 1); // Elimina el producto del carrito
+    actualizarCarrito(); // Actualiza la vista del carrito
+}
+
+// Función para limpiar el carrito
 function limpiarCarrito() {
-    carrito = [];
-    actualizarCarrito();
+    carrito = []; // Limpia el carrito
+    actualizarCarrito(); // Actualiza la vista del carrito
 }
 
-// Function to finalize the purchase
+// Función para finalizar la compra
 function finalizarCompra() {
-    if (carrito.length > 0) {
-        alert("Compra realizada con éxito. ¡Gracias por tu compra!");
-        limpiarCarrito();
-    } else {
-        alert("El carrito está vacío.");
+    if (carrito.length === 0) {
+        alert('Tu carrito está vacío. Agrega productos para comprar.');
+        return;
     }
+
+    // Lógica para finalizar la compra
+    alert('¡Compra finalizada con éxito! Total Cancelado .');
+    limpiarCarrito(); // Limpiar el carrito después de la compra
 }
 
-// Search functionality
+// Función de búsqueda de productos
 function buscarProducto() {
     const searchTerm = document.getElementById('search-input').value.toLowerCase();
     const filteredProducts = productos.filter(prod => prod.nombre.toLowerCase().includes(searchTerm));
-    
+
     const productosList = document.getElementById('productos-list');
     productosList.innerHTML = '';
+
     filteredProducts.forEach(producto => {
         const productCard = document.createElement('div');
         productCard.classList.add('product-card');
@@ -133,11 +158,11 @@ function buscarProducto() {
             <img src="${producto.imagen}" alt="${producto.nombre}">
             <h3>${producto.nombre}</h3>
             <p>Q${producto.precio}</p>
-            <button class="btn" onclick="agregarAlCarrito(${producto.id})">Agregar al Carrito</button>
+            <button onclick="agregarAlCarrito(${producto.id})">Agregar al Carrito</button>
         `;
         productosList.appendChild(productCard);
     });
 }
 
-// Initialize the page by showing products
-mostrarProductos();
+// Inicializar la página mostrando productos
+document.addEventListener('DOMContentLoaded', mostrarProductos);

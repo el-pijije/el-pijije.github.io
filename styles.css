@@ -1,5 +1,4 @@
-/* General Styles */
-*/* Reset and Base Styles */
+/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -104,12 +103,21 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 250px;
     text-align: center;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .product-card img {
     width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
 .product-card h3 {
@@ -128,6 +136,18 @@ body {
     text-decoration: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+}
+
+.product-card .btn:hover {
+    background-color: #0056b3; /* Hover color */
+}
+
+/* Estilos para cuando el botón está en estado 'Agregado' */
+.product-card .btn.added {
+    background-color: #28a745; /* Verde para indicar éxito */
+    cursor: not-allowed; /* Evitar más clics */
 }
 
 /* Carrito Section */
@@ -300,4 +320,20 @@ footer {
     #total-carrito {
         font-size: 16px;
     }
+}
+
+/* Estilos básicos para el botón */
+.btn {
+    background-color: #007BFF; /* Color azul */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Color al pasar el mouse */
 }
