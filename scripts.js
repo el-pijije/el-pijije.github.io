@@ -139,7 +139,7 @@ function finalizarCompra() {
     }
 
     // Lógica para finalizar la compra
-    alert('¡Compra finalizada con éxito! Total Cancelado .');
+    alert('¡Compra finalizada con éxito! Gracias por su compra  .');
     limpiarCarrito(); // Limpiar el carrito después de la compra
 }
 

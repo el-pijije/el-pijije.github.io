@@ -5,6 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Almacén de Computadoras</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        #counter {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+        #video-publicitario {
+            text-align: center;
+            margin-top: 30px;
+        }
+        #video-publicitario iframe {
+            width: 80%;
+            height: 400px;
+        }
+    </style>
 </head>
 <body>
     <!-- Navbar -->
@@ -29,6 +44,22 @@
             <p>Las mejores ofertas en computadoras de alto rendimiento.</p>
             <a href="#productos" class="btn">Ver Productos</a>
         </div>
+    </section>
+
+    <!-- Contador de visitas -->
+    <section id="counter">
+        <div id="visit-count">
+            Visitas: <span id="contador-visitas">0</span>
+        </div>
+    </section>
+
+    <!-- Video Publicitario -->
+    <section id="video-publicitario">
+        <h2>¡Mira nuestro video publicitario!</h2>
+        <video width="80%" height="400" controls>
+            <source src="video/apple.mp4" type="video/mp4">
+            Tu navegador no soporta la etiqueta de video.
+        </video>
     </section>
 
     <!-- Buscador -->
@@ -94,6 +125,14 @@
     <footer>
         <p>&copy; 2025 AlmacenPC. Alfredo Ramazzini 5to BACO.</p>
     </footer>
+
+    <script>
+        // Función para el contador de visitas
+        let visitas = localStorage.getItem('visitas') ? parseInt(localStorage.getItem('visitas')) : 0;
+        visitas++;
+        localStorage.setItem('visitas', visitas);
+        document.getElementById('contador-visitas').innerText = visitas;
+    </script>
 
     <script src="scripts.js"></script>
 </body>
