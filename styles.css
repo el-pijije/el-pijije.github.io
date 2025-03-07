@@ -85,6 +85,11 @@ body {
 }
 
 /* Hero Section */
+.hero-content {
+    margin-top: 100px;  /* Aumenta el valor de margen según lo que necesites */
+    text-align: center;
+}
+
 .hero {
     background-color: #333;
     color: white;
