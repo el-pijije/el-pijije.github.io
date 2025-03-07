@@ -1,4 +1,19 @@
 
+// Obtener el botón y el menú
+document.getElementById('toggleMenu').addEventListener('click', function() {
+    var menu = document.getElementById('menu');
+    if (menu.style.display === 'none' || menu.style.display === '') {
+        menu.style.display = 'block'; // Muestra el menú
+    } else {
+        menu.style.display = 'none'; // Oculta el menú
+    }
+});
+// JavaScript para controlar el desplazamiento del botón
+window.addEventListener('scroll', function() {
+    var button = document.getElementById('toggleMenu');
+    var scrollPosition = window.scrollY || window.pageYOffset; // Obtener la posición del scroll
+    button.style.top = (20 + scrollPosition) + 'px'; // El botón sigue al desplazamiento
+});
 // Productos (para simular 50 productos)
 // Productos (con nombres reales)
 // Productos (con nombres reales, precios en quetzales y enlaces de imágenes)
@@ -39,19 +54,19 @@ const productos = [
     { id: 35, nombre: 'HP Envy x360', precio: '8,099.99', imagen: 'https://www.intelaf.com/images/productos/gran/hp-env-15fh0000.jpg' },
     { id: 36, nombre: 'Gigabyte Aorus 15', precio: '10,299.99', imagen: 'https://images-cdn.ubuy.co.in/655b721f33049b4347383c23-gigabyte-aorus-15-6-144hz-gaming.jpg' },
     { id: 37, nombre: 'Apple Mac Mini M1', precio: '5,799.99', imagen: 'https://istore.gt/wp-content/uploads/2021/03/EC00032iii.jpg' },
-    { id: 38, nombre: 'Acer Swift 3', precio: '6,299.99', imagen: 'https://www.acer.com/ac/en/US/content/series/swift-3' },
-    { id: 39, nombre: 'Microsoft Surface Book 3', precio: '12,199.99', imagen: 'https://www.microsoft.com/en-us/surface/devices/surface-book-3/media/surface-book-3-hero.jpg' },
-    { id: 40, nombre: 'Asus VivoBook 15', precio: '4,799.99', imagen: 'https://www.asus.com/media/16534388/vivobook-15-x512.jpg' },
-    { id: 41, nombre: 'Dell Latitude 7400', precio: '12,399.99', imagen: 'https://www.dell.com/sites/csimages/Merchandizing_Imagery/en-us/dell-latitude-7400-hero.jpg' },
-    { id: 42, nombre: 'MSI GL65 Leopard', precio: '8,199.99', imagen: 'https://www.msi.com/Laptop/GL65-Leopard/Overview' },
-    { id: 43, nombre: 'Toshiba Satellite Pro', precio: '6,599.99', imagen: 'https://www.dynabook.com/products/satellite-pro-a50-j/' },
-    { id: 44, nombre: 'Razer Core X Chroma', precio: '3,199.99', imagen: 'https://www.razer.com/Content/dam/razer/2021/razergaminglaptops/razer-blade-15-core-x.jpg' },
-    { id: 45, nombre: 'Lenovo IdeaPad Flex 5', precio: '5,199.99', imagen: 'https://www.lenovo.com/medias/lenovo-ideapad-flex-5-hero.png?context=bWFzdGVyfGltYWdlc3wzMzMzOHxpbWFnZS9wbmcvbWluZy9oNTY5L2gyNy9oYmQ5L2gyNi9oZmQ3L2hmYS9oMmM4LzQzNTgxNTgzX19jcnBfcXVhY2hldS5wbmc&f=original' },
-    { id: 46, nombre: 'HP Chromebook x360', precio: '4,999.99', imagen: 'https://www.hp.com/us-en/shop/app/assets/images/product/chromebook-x360-2020-hero.jpg' },
-    { id: 47, nombre: 'Apple iPad Pro 12.9"', precio: '13,799.99', imagen: 'https://www.apple.com/v/ipad-pro-12.9/a/images/overview/hero_ipad_pro_12_9__gnfplkz29m8y_large.jpg' },
-    { id: 48, nombre: 'Samsung Galaxy Book2 Pro 360', precio: '9,799.99', imagen: 'https://images.samsung.com/is/image/samsung/p6pim/latin_en/np930qdb-kc2cl_gallery-01.jpg' },
-    { id: 49, nombre: 'HP EliteBook x360', precio: '12,499.99', imagen: 'https://www.hp.com/us-en/shop/app/assets/images/product/elitebook-x360-2020-hero.jpg' },
-    { id: 50, nombre: 'Apple iMac 27" 5K', precio: '21,999.99', imagen: 'https://www.apple.com/v/imac-27/a/images/overview/hero_imac_27__kpa4l8pijpyq_large.jpg' }
+    { id: 38, nombre: 'Acer Swift 3', precio: '6,299.99', imagen: 'https://img.pacifiko.com/PROD/resize/1/500x500/NWY4YTIxNW.jpg' },
+    { id: 39, nombre: 'Microsoft Surface Book 3', precio: '12,199.99', imagen: 'https://img.pacifiko.com/PROD/resize/1/1000x1000/NmU3YThkOD.jpg' },
+    { id: 40, nombre: 'Asus VivoBook 15', precio: '4,799.99', imagen: 'https://img.pacifiko.com/PROD/resize/1/500x500/ZWUyYjIyNz.jpg' },
+    { id: 41, nombre: 'Dell Latitude 7400', precio: '12,399.99', imagen: 'https://img.pacifiko.com/PROD/resize/1/1000x1000/NWEyMWZhMD_3.jpg' },
+    { id: 42, nombre: 'MSI GL65 Leopard', precio: '8,199.99', imagen: 'https://m.media-amazon.com/images/I/81Mbw6RBtPL._AC_SL1500_.jpg' },
+    { id: 43, nombre: 'Toshiba Satellite Pro', precio: '6,599.99', imagen: 'https://m.media-amazon.com/images/I/616LiZsNLHL._AC_SL1500_._SX600_.jpg' },
+    { id: 44, nombre: 'Razer Core X Chroma', precio: '3,199.99', imagen: 'https://assets2.razerzone.com/images/pnx.assets/3b3a58f361156e05b070aa69389c3bca/core-x-core-x-chroma-comparison-img-v2.png' },
+    { id: 45, nombre: 'Lenovo IdeaPad Flex 5', precio: '5,199.99', imagen: 'https://img.pacifiko.com/PROD/resize/1/1000x1000/MTZhY2Q1MT.jpg' },
+    { id: 46, nombre: 'HP Chromebook x360', precio: '4,999.99', imagen: 'https://i5.walmartimages.com/seo/HP-Chromebook-x360-14-Touchscreen-Laptop-Intel-Celeron-N4020-4GB-RAM-64GB-HD-Chrome-OS-Forest-Teal-Light-Teal-14a-ca0190wm_46c2747c-82b9-46c2-9e84-377e2880a61e.52496ae5570f4d31b56e5e97fda087a8.jpeg' },
+    { id: 47, nombre: 'Apple iPad Pro 12.9"', precio: '13,799.99', imagen: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOXtyQYPI_Et0SMe51mK_HnGpLseI_k_Vu7w&s' },
+    { id: 48, nombre: 'Samsung Galaxy Book2 Pro 360', precio: '9,799.99', imagen: 'https://i.blogs.es/beca39/samsung8/1366_2000.jpeg' },
+    { id: 49, nombre: 'HP EliteBook x360', precio: '12,499.99', imagen: 'https://cdn.kemik.gt/2024/12/A9FH7LA-HP-1200-1200-02.-500x500.jpg' },
+    { id: 50, nombre: 'Apple iMac 27" 5K', precio: '21,999.99', imagen: 'https://cdn.pacifiko.com/image/catalog/NzY2ZjE3Zj.jpg' }
 ];
 
 let carrito = [];

@@ -122,7 +122,8 @@
 <body>
     <!-- Navbar -->
     <header>
-        <ul class="menu">
+        <button id="toggleMenu" style="position: absolute; top: 20px; right: 20px;">Mostrar/Ocultar Menú</button>
+        <ul class="menu" id="menu" style="display: none;">
             <li><a href="#home">Inicio</a></li>
             <li><a href="#productos">Productos</a></li>
             <li><a href="#contacto">Contacto</a></li>
@@ -138,11 +139,9 @@
             </a></li>
         </ul>
     </header>
-
+    
     <!-- Marquesina -->
-    <section class="marquesina">
-        <div>¡La tecnología que necesitas, al alcance de tu mano!</div>
-    </section>
+   
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -155,12 +154,7 @@
 
         <div style="display: flex; justify-content: space-between; max-width: 100%; width: 100%; margin: 0 auto;">
             <!-- Primer bloque (izquierda) -->
-            <div style="text-align: left;">
-                <h2></h2>
-                <a href="https://www.apple.com/la/macbook-pro/" target="_blank">
-                    <img src="" alt="Apple" style="width: 100%; max-width: 250px; display: block;">
-                </a>
-            </div>
+          
 
             <!-- Segundo bloque (derecha) -->
             <div style="text-align: right;">
@@ -188,9 +182,9 @@
         </div>
     </section>
 
-    <!-- Slogan -->
-    <section class="slogan">
-        <p>¡La tecnología que necesitas, al alcance de tu mano!</p>
+    <!-- marquesina -->
+    <section class="marquesina">
+        <h1><div>¡La tecnología que necesitas, al alcance de tu mano!</div></h1>
     </section>
 
     <!-- Contador de visitas -->

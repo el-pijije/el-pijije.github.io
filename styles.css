@@ -11,6 +11,7 @@ body {
     color: #333;
 }
 
+
 /* Navbar */
 .navbar {
     background-color: #000;
@@ -37,6 +38,51 @@ body {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
+}
+
+/* Menu Toggle */
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none; /* Inicialmente oculto */
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.menu li {
+    margin: 10px 0;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* Estilo del botón de toggle */
+#toggleMenu {
+    position: fixed;
+    right: 20px; /* Mantener el botón a la derecha */
+    top: 20px; /* Establecer la posición inicial del botón */
+    background-color: #ff6600; /* Color de fondo llamativo */
+    color: white; /* Color del texto */
+    padding: 12px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px; /* Bordes redondeados */
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para hacerlo más visible */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Animación */
+}
+
+#toggleMenu:hover {
+    background-color: #e65c00; /* Cambio de color al pasar el mouse */
+    transform: scale(1.05); /* Efecto de agrandado */
 }
 
 /* Hero Section */
