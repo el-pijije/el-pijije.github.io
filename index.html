@@ -116,6 +116,15 @@
         #productos {
             margin-left: 25px;  /* Ajuste aquí */
         }
+            /* Logo en la parte superior izquierda */
+            .hero-logo {
+            position: absolute;
+            top: 20px; /* Lo pone un poco hacia abajo */
+            left: 20px; /* Lo pone un poco hacia la derecha */
+            width: 120px; /* Ajusta el tamaño */
+            height: auto; /* Mantiene la proporción */
+            z-index: 10; /* Asegura que esté por encima de otros elementos */
+        }
 
     </style>
 </head>
@@ -152,7 +161,7 @@
             <a href="#productos" class="btn"> Ver Productos </a>
         </div>
         <p></p>
-
+        <img src="logo.png.jpg" alt="Logo" class="hero-logo">
         <div style="display: flex; justify-content: space-between; max-width: 100%; width: 100%; margin: 0 auto;">
             <!-- Primer bloque (izquierda) -->
           
@@ -224,7 +233,7 @@
 
     <!-- Botón para descargar promociones -->
     <section class="download-section" style="text-align: center;">
-        <a href="promociones.pdf" class="btn-promociones" download="promociones">Descargar Promociones</a>
+        <a href="promociones.pdf" class="btn-promociones" download="promociones">Descargar Promociones Del Mes</a>
     </section>
 
     <!-- Productos -->
