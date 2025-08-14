@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Proyecto: 5 Semáforos con Arduino Mega</title>
+  <meta name="description" content="Guía completa para montar 5 semáforos con Arduino Mega, LEDs, resistencias, jumpers y breadboard. Incluye mapeo de pines, pasos y código.">
+  <style>
+    :root{
+      --bg: #0f1115;
+      --panel: #171923;
+      --ink: #e8e8f1;
+      --muted:#a8b0c2;
+      --brand:#5ee3a1;
+      --accent:#7aa9ff;
+      --danger:#ff6666;
+      --warn:#ffd166;
+      --ok:#3de37a;
+      --card:#1d2130;
+      --border:#2a3042;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 14px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f6f8ff;
+        --panel:#ffffff;
+        --ink:#1f2430;
+        --muted:#4f5a6d;
+        --card:#ffffff;
+        --border:#e6e9f2;
+        --shadow: 0 10px 24px rgba(31,36,48,.08);
+      }
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1100px;margin:auto;padding:24px}
+    header{
+      background: radial-gradient(1200px 500px at 20% -10%, rgba(122,169,255,.18), transparent 60%),
+                  radial-gradient(1000px 500px at 90% 0%, rgba(94,227,161,.16), transparent 60%),
+                  var(--panel);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero{display:grid;gap:20px;grid-template-columns:1.2fr .8fr;align-items:center;padding:36px 0}
+    .hero h1{font-size:clamp(24px,4vw,44px);margin:0 0 8px}
+    .hero p{color:var(--muted);margin:0}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .controls{padding:16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:flex-start}
+    .controls label{font-weight:600}
+    .btn{appearance:none;border:1px solid var(--border);background:var(--panel);color:var(--ink);padding:10px 14px;border-radius:10px;cursor:pointer}
+    .btn:hover{border-color:var(--accent)}
+    .grid{display:grid;gap:16px}
+    .two{grid-template-columns:1fr 1fr}
+    .three{grid-template-columns:repeat(3,1fr)}
+    @media(max-width:900px){.hero{grid-template-columns:1fr}.two,.three{grid-template-columns:1fr}}
+    section{margin:28px 0}
+    h2{margin:0 0 8px;font-size:clamp(20px,2.6vw,28px)}
+    .muted{color:var(--muted)}
+    .list{padding:16px}
+    .list li{margin:6px 0}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+    th{background:rgba(122,169,255,.08)}
+    code,pre{background:#0c0f16;color:#d7e1ff;border:1px solid var(--border);border-radius:10px}
+    pre{padding:16px;overflow:auto}
+    code{padding:.15em .35em;border-radius:6px}
+    /* Semáforos (simulación visual) */
+    .yard{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;padding:16px}
+    .pole{display:flex;flex-direction:column;align-items:center;padding:16px}
+    .traffic{
+      width:70px;background:#0a0d13;border:1px solid #2b3144;border-radius:14px;padding:10px 10px 16px;display:grid;gap:10px;justify-items:center;
+      box-shadow: inset 0 0 20px rgba(0,0,0,.45);
+    }
+    .lamp{width:36px;height:36px;border-radius:50%;filter: drop-shadow(0 2px 4px rgba(0,0,0,.45));opacity:.2;transition:opacity .2s, box-shadow .2s}
+    .lamp.red{background:#ff4b4b}
+    .lamp.yellow{background:#ffdb6e}
+    .lamp.green{background:#36e36c}
+    .lamp.on{opacity:1; box-shadow:0 0 16px currentColor, 0 0 30px currentColor inset}
+    .label{margin-top:8px;font-weight:700;color:var(--muted)}
+    .foot{width:10px;height:110px;background:linear-gradient(#23283a,#1b1f2f);margin-top:8px;border-radius:4px}
+    .note{padding:12px;border-left:4px solid var(--brand);background:linear-gradient(180deg, rgba(94,227,161,.08), transparent)}
+    .kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap hero">
+    <div>
+      <h1>5 Semáforos con Arduino Mega</h1>
+      <p class="muted">Proyecto educativo con <b>LEDs</b>, <b>resistencias</b>, <b>jumpers</b> y <b>breadboard</b>. Controlamos 5 conjuntos (Rojo-Amarillo-Verde) desde un Arduino Mega, con simulación visual y código listo para cargar.</p>
+      <div class="note" style="margin-top:14px">
+        Objetivo: practicar salidas digitales, organización por arrays y cableado seguro usando resistencias de <b>220&nbsp;Ω</b> por LED.
+      </div>
+    </div>
+    <div class="card">
+      <div class="controls">
+        <button id="startBtn" class="btn">▶ Iniciar simulación</button>
+        <button id="stopBtn" class="btn">⏹ Detener</button>
+        <label for="spd">Velocidad</label>
+        <input id="spd" type="range" min="0.4" max="2.0" step="0.1" value="1.0" />
+        <span id="spdVal" class="muted">1.0×</span>
+      </div>
+      <div class="yard" id="yard">
+        <!-- 5 postes/semaforos -->
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <h2>Materiales</h2>
+    <div class="grid two">
+      <div class="card list">
+        <ul>
+          <li>1 × Arduino Mega 2560 (o compatible)</li>
+          <li>1 × Breadboard grande</li>
+          <li>15 × LEDs (5 rojos, 5 amarillos, 5 verdes)</li>
+          <li>15 × Resistencias 220&nbsp;Ω (o 330&nbsp;Ω)</li>
+          <li>Muchos jumpers macho-macho</li>
+          <li>Cable USB para programar</li>
+          <li>Fuente 5&nbsp;V (la del USB basta para pruebas)</li>
+        </ul>
+      </div>
+      <div class="card list">
+        <ul>
+          <li>GND común a todas las líneas negativas de la breadboard.</li>
+          <li>Ánodo del LED → <b>resistencia</b> → <b>pin digital</b>.</li>
+          <li>Cátodo del LED → <b>GND</b>.</li>
+          <li>Usamos 15 pines digitales del Mega, uno por LED.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Mapeo de pines (Arduino Mega → LED)</h2>
+    <p class="muted">Cada semáforo tiene 3 LEDs: Rojo (R), Amarillo (A), Verde (V). Puedes cambiar los pines si lo prefieres.</p>
+    <div class="card" style="overflow:auto">
+      <table>
+        <thead><tr><th>Semáforo</th><th>Rojo</th><th>Amarillo</th><th>Verde</th></tr></thead>
+        <tbody>
+          <tr><td>S1</td><td>13</td><td>12</td><td>11</td></tr>
+          <tr><td>S2</td><td>10</td><td>9</td><td>8</td></tr>
+          <tr><td>S3</td><td>5</td><td>6</td><td>7</td></tr>
+          <tr><td>S4</td><td>2</td><td>3</td><td>4</td></tr>
+          <tr><td>S5</td><td>10</td><td>9</td><td>8</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted">Consejo: lleva líneas de 5&nbsp;V y GND por los rieles laterales de la breadboard para ordenar el cableado.</p>
+  </section>
+
+  <section class="grid two">
+    <div>
+      <h2>Montaje paso a paso</h2>
+      <ol class="card list">
+        <li>Conecta el <b>GND</b> del Arduino a la línea negativa de la breadboard.</li>
+        <li>Coloca los 15 LEDs: en cada semáforo agrupa R-A-V (ánodo a la derecha es práctico).</li>
+        <li>Del <b>ánodo</b> de cada LED, pon una <b>resistencia 220&nbsp;Ω</b> hacia una fila libre.</li>
+        <li>De esa fila, saca un <b>jumper</b> al pin asignado (ver tabla de pines).</li>
+        <li>Conecta cada <b>cátodo</b> al riel de <b>GND</b>.</li>
+        <li>Revisa polaridad de LEDs (la pata larga suele ser el ánodo).</li>
+        <li>Programa el Arduino con el sketch de abajo y prueba.</li>
+      </ol>
+    </div>
+    <div>
+      <h2>Lógica sugerida</h2>
+      <div class="card list">
+        <ul>
+          <li>Secuencia tipo “onda”: S1 en verde → S2 → S3 → S4 → S5.</li>
+          <li>Para cada S<i>n</i>: <span class="kbd">Verde</span> (t_v), <span class="kbd">Amarillo</span> (t_a), y el resto en rojo.</li>
+          <li>Evita encender dos verdes conflictivos si simulas intersecciones reales.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Código Arduino </h2>
+    <p class="muted">Copia esto en el IDE de Arduino como <code>semaforos_mega.ino</code>. Asegúrate de que los pines coincidan con tu mapeo.</p>
+    <pre><code class="language-cpp">// Proyecto: 5 semáforos con Arduino Mega
+// Cada LED debe llevar su resistencia (220 Ω o 330 Ω) en serie.
+
+
+
+// C++ code
+//
+void setup()
+{
+  pinMode(13, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(11, OUTPUT);
+  pinMode(10, OUTPUT);
+  pinMode(9, OUTPUT);
+  pinMode(8, OUTPUT);
+  pinMode(7, OUTPUT);
+  pinMode(6, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(2, OUTPUT);
+}
+
+void loop()
+{
+ 
+  digitalWrite(4,HIGH);
+  digitalWrite(3, LOW);
+  digitalWrite(2, LOW);
+  digitalWrite(5,HIGH);
+  digitalWrite(8,LOW);
+  digitalWrite(6, LOW);
+  digitalWrite(7, LOW);
+  digitalWrite(10, HIGH);
+  digitalWrite(9,LOW);
+  digitalWrite(13, HIGH);
+  delay(5000);
+ 
+  digitalWrite(4, LOW);
+ delay(500);
+  digitalWrite(4,HIGH);
+ delay(500);
+digitalWrite(4,LOW);
+ delay(500);
+  digitalWrite(4,HIGH);
+ delay(500);
+  digitalWrite(4,LOW);
+ delay(500);
+ 
+  digitalWrite(3, HIGH);
+ delay(1000);
+  digitalWrite(3, LOW);
+ delay(500);
+  digitalWrite(3, HIGH);
+ delay(500);
+  digitalWrite(3, LOW);
+ delay(500);
+  digitalWrite(3, HIGH);
+ delay(500);
+ 
+ 
+  digitalWrite(5,HIGH);
+  digitalWrite(8,HIGH);
+  digitalWrite(6, LOW);
+  digitalWrite(7, LOW);
+  digitalWrite(10, LOW);
+  digitalWrite(9,LOW);
+  digitalWrite(3, LOW);
+  digitalWrite(13, HIGH);
+  digitalWrite(2, HIGH);
+  delay(5000);
+ 
+  digitalWrite(8, LOW);
+ delay(500);
+  digitalWrite(8,HIGH);
+ delay(500);
+digitalWrite(8,LOW);
+ delay(500);
+  digitalWrite(8,HIGH);
+ delay(500);
+ 
+  digitalWrite(10,LOW);
+  digitalWrite(9,HIGH);
+  digitalWrite(8,LOW);
+  digitalWrite(13, HIGH);
+  delay(2000);
+ 
+   digitalWrite(9,LOW);
+ delay(500);
+  digitalWrite(9,HIGH);
+ delay(500);
+  digitalWrite(9,LOW);
+ delay(500);
+  digitalWrite(9,HIGH);
+ delay(500);
+ 
+  digitalWrite(5, LOW);
+  digitalWrite(6, LOW);
+  digitalWrite(7,HIGH);
+  digitalWrite(8, LOW);
+  digitalWrite(10,HIGH);
+  digitalWrite(9, LOW);
+  digitalWrite(13, HIGH);
+  delay(5000);
+ 
+ delay(500);
+digitalWrite(7, LOW);
+ delay(500);
+  digitalWrite(7, HIGH);
+ delay(500);
+digitalWrite(7, LOW);
+ delay(500);
+  digitalWrite(7, HIGH);
+ delay(500);
+ 
+   digitalWrite(5, LOW);
+  digitalWrite(6,HIGH);
+  digitalWrite(7, LOW);
+  delay(2000);
+ 
+   digitalWrite(6, LOW);
+ delay(500);
+  digitalWrite(6, HIGH);
+ delay(500);
+  digitalWrite(6, LOW);
+ delay(500);
+  digitalWrite(6, HIGH);
+ delay(500);
+ 
+  digitalWrite(5, HIGH);
+  digitalWrite(6, LOW);
+  digitalWrite(7,LOW);
+  digitalWrite(8, LOW);
+  digitalWrite(10,HIGH);
+  digitalWrite(9, LOW);
+  digitalWrite(11, HIGH);
+  digitalWrite(13, LOW);
+ 
+  delay(5000);
+ 
+  digitalWrite(11, LOW);
+ delay(500);
+  digitalWrite(11, HIGH);
+ delay(500);
+digitalWrite(11, LOW);
+ delay(500);
+  digitalWrite(11, HIGH);
+ delay(500);
+  digitalWrite(11, LOW);
+ delay(500);
+ 
+   
+digitalWrite(12, HIGH);//semaforo 1
+ delay(1000);
+  digitalWrite(12, LOW);//semaforo 1
+ delay(500);
+  digitalWrite(12, HIGH);//semaforo 1
+ delay(500);
+digitalWrite(12, LOW);//semaforo 1
+ delay(500);
+  digitalWrite(12, HIGH);//semaforo 1
+ delay(500);
+  digitalWrite(12, LOW);//semaforo 1
+ delay(500);
+ 
+}
+</code></pre>
+    
+  </section>
+
+  <section>
+    <h2>Problemas comunes</h2>
+    <div class="grid two">
+      <div class="card list">
+        <ul>
+          <li><b>LED no enciende:</b> revisa polaridad (cátodo a GND) y la resistencia en serie.</li>
+          <li><b>Todos encendidos muy tenue:</b> GND sin buen contacto.</li>
+          <li><b>Secuencia rara:</b> pines del sketch no coinciden con tu cableado.</li>
+        </ul>
+      </div>
+      <div class="card list">
+        <ul>
+          <li><b>Demasiada corriente:</b> nunca alimentes un LED sin resistencia.</li>
+          <li><b>Desorden:</b> usa colores por función (rojo=5V/pines, negro=GND, amarillo=señales).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+ <section id="galeria del proceso de nuestro proyecto">
+    <h2>Galería del proceso de nuestro proyecto</h2>
+    <div class="galeria ">
+        <div class="galeria-item"><img src="galeria/imag1.jpg" alt="Imagen 1"><p>Imagen 1</p></div>
+        <div class="galeria-item"><img src="galeria/imag2.jpg" alt="Imagen 2"><p>Imagen 2</p></div>
+        <div class="galeria-item"><img src="galeria/imag3.jpg" alt="Imagen 3"><p>Imagen 3</p></div>
+
+        <div class="galeria-item"><img src="galeria/imag4.jpg" alt="Imagen 4"><p>Imagen 4</p></div>
+        <div class="galeria-item"><img src="galeria/imag5.jpg" alt="Imagen 5"><p>Imagen 5</p></div>
+        <div class="galeria-item"><img src="galeria/imag6.jpg" alt="Imagen 6"><p>Imagen 6</p></div>
+
+        <div class="galeria-item"><img src="galeria/imag7.jpg" alt="Imagen 7"><p>Imagen 7</p></div>
+        <div class="galeria-item"><img src="galeria/imag9.jpg" alt="Imagen 8"><p>Imagen 8</p></div>
+        <div class="galeria-item"><img src="galeria/imag10.jpg" alt="Imagen 9"><p>Imagen 9</p></div>
+
+        <div class="galeria-item"><img src="galeria/imag11.jpg" alt="Imagen 10"><p>Imagen 10</p></div>
+        <div class="galeria-item"><img src="galeria/imag12.jpg" alt="Imagen 11"><p>Imagen 11</p></div>
+        <div class="galeria-item"><img src="galeria/imag13.jpg" alt="Imagen 12"><p>Imagen 12</p></div>
+    </div>
+</section>
+
+<style>
+#galeria {
+    padding: 20px;
+}
+
+.galeria {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.galeria-item {
+    text-align: center;
+    background: #f5f5f5;
+    padding: 10px;
+    border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.galeria-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
+.galeria-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+</style>
+
+
+
+  <footer class="wrap muted" style="padding-bottom:40px">
+    Alfredo Ramazzini 5to BACO
+  </footer>
+</main>
+
+<script>
+  // --- Construcción de los 5 semáforos visuales ---
+  const yard = document.getElementById('yard');
+  const COUNT = 5;
+  const posts = [];
+
+  for(let i=0;i<COUNT;i++){
+    const pole = document.createElement('div');
+    pole.className = 'pole';
+    pole.innerHTML = `
+      <div class="traffic" data-idx="${i}">
+        <div class="lamp red"></div>
+        <div class="lamp yellow"></div>
+        <div class="lamp green"></div>
+      </div>
+      <div class="foot"></div>
+      <div class="label">S${i+1}</div>
+    `;
+    yard.appendChild(pole);
+    posts.push(pole.querySelector('.traffic'));
+  }
+
+  // Utilidades
+  const lamps = (n)=>({
+    r: posts[n].querySelector('.lamp.red'),
+    y: posts[n].querySelector('.lamp.yellow'),
+    g: posts[n].querySelector('.lamp.green')
+  });
+
+  function setState(n, r,y,g){
+    const L = lamps(n);
+    L.r.classList.toggle('on', !!r);
+    L.y.classList.toggle('on', !!y);
+    L.g.classList.toggle('on', !!g);
+  }
+
+  function allRed(){
+    for(let i=0;i<COUNT;i++) setState(i, true,false,false);
+  }
+
+  // Simulación básica tipo “onda” (S1→S5)
+  let running = false, speed = 1.0;
+  const startBtn = document.getElementById('startBtn');
+  const stopBtn  = document.getElementById('stopBtn');
+  const spd      = document.getElementById('spd');
+  const spdVal   = document.getElementById('spdVal');
+
+  const T = { green: 1200, yellow: 450, redPause: 120 };
+
+  async function phase(n){
+    allRed(); 
+    await sleep(T.redPause / speed);
+
+    setState(n,false,false,true); 
+    await sleep(T.green / speed);
+
+    setState(n,false,true,false); 
+    await sleep(T.yellow / speed);
+
+    setState(n,true,false,false); 
+    await sleep(T.redPause / speed);
+  }
+
+  async function phaseDual(n1, n2){
+    allRed(); 
+    await sleep(T.redPause / speed);
+
+    setState(n1,false,false,true);
+    setState(n2,false,false,true);
+    await sleep(T.green / speed);
+
+    setState(n1,false,true,false);
+    setState(n2,false,true,false);
+    await sleep(T.yellow / speed);
+
+    setState(n1,true,false,false);
+    setState(n2,true,false,false);
+    await sleep(T.redPause / speed);
+  }
+
+  function sleep(ms){ return new Promise(r=>setTimeout(r, ms)); }
+
+  async function run(){
+    if(running) return;
+    running = true;
+    while(running){
+        await phase(0);       // Semáforo 1
+        await phaseDual(1,4); // Semáforo 2 y 5 juntos
+        await phase(2);       // Semáforo 3
+        await phase(3);       // Semáforo 4
+    }
+  }
+
+  startBtn.addEventListener('click', ()=>{ run(); });
+  stopBtn.addEventListener('click', ()=>{
+    running = false;
+    allRed();
+  });
+
+  spd.addEventListener('input', e=>{
+    speed = parseFloat(e.target.value);
+    spdVal.textContent = speed.toFixed(1)+'×';
+  });
+
+  // Estado inicial
+  allRed();
+</script>
+
+</body>
+</html>
