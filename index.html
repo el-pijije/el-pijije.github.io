@@ -1,311 +1,3539 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Almacén de Computadoras</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        #counter {
-            margin-top: 20px;
-            font-size: 1.2em;
-            color: #333;
-        }
-        #video-publicitario {
-            text-align: center;
-            margin-top: 30px;
-        }
-        #video-publicitario iframe {
-            width: 80%;
-            height: 400px;
-        }
-        .slogan {
-            text-align: center;
-            font-size: 1.5em;
-            margin-top: 20px;
-            color: #f39c12;
-            font-weight: bold;
-        }
-        .btn-promociones {
-            display: inline-block;
-            background-color: #2ecc71;
-            color: white;
-            padding: 12px 20px;
-            font-size: 1em;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-        .btn-promociones:hover {
-            background-color: #27ae60;
-        }
-        /* Marquesina */
-        .marquesina {
-            background-color: #333;
-            color: #fff;
-            font-size: 1.2em;
-            padding: 10px;
-            text-align: center;
-            white-space: nowrap;
-            overflow: hidden;
-            box-sizing: border-box;
-        }
-        .marquesina div {
-            display: inline-block;
-            padding-right: 100%;
-            animation: mover 10s linear infinite;
-        }
-        @keyframes mover {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BioLab — Laboratorio Clínico</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #132040;
+    --teal: #0fa3a3;
+    --teal-light: #e0f7f7;
+    --teal-dark: #077a7a;
+    --cream: #f9f6f0;
+    --cream-dark: #ede9e0;
+    --text: #1a2236;
+    --text-muted: #5a6476;
+    --white: #ffffff;
+    --gold: #c8973a;
+    --success: #1e7e4a;
+    --danger: #b03030;
+    --border: #d6d0c4;
+    --shadow: 0 4px 24px rgba(10,22,40,0.10);
+    --radius: 12px;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
 
-        /* Estilos para el menú lateral */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .menu {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 200px;
-            height: 100%;
-            background-color: #333;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-        }
+  body {
+    font-family: var(--font-body);
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
 
-        .menu li {
-            padding: 15px;
-            text-align: center;
-        }
+  /* ===== NAV ===== */
+  nav {
+    background: var(--navy);
+    padding: 0 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    position: relative;
+  }
 
-        .menu li a {
-            color: white;
-            text-decoration: none;
-            display: block;
-        }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 
-        .menu li a:hover {
-            background-color: #575757;
-        }
+  .nav-logo span {
+    color: var(--teal);
+  }
 
-        #carrito-link {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+  .nav-logo .dot {
+    width: 8px; height: 8px;
+    background: var(--teal);
+    border-radius: 50%;
+    display: inline-block;
+  }
 
-        #carrito-count {
-            background-color: #f00;
-            padding: 0 5px;
-            border-radius: 50%;
-            font-size: 14px;
-            color: white;
-        }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
 
-        /* Ajuste para mover los productos a la derecha */
-        #productos {
-            margin-left: 25px;  /* Ajuste aquí */
-        }
-            /* Logo en la parte superior izquierda */
-            .hero-logo {
-            position: absolute;
-            top: 20px; /* Lo pone un poco hacia abajo */
-            left: 20px; /* Lo pone un poco hacia la derecha */
-            width: 120px; /* Ajusta el tamaño */
-            height: auto; /* Mantiene la proporción */
-            z-index: 10; /* Asegura que esté por encima de otros elementos */
-        }
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
 
-    </style>
+  .nav-links a:hover { color: var(--teal); }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .btn-nav {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--white);
+    padding: 0.45rem 1.1rem;
+    border-radius: 6px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-nav:hover {
+    background: rgba(15,163,163,0.2);
+    border-color: var(--teal);
+    color: var(--teal);
+  }
+
+  .btn-nav-primary {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  .btn-nav-primary:hover {
+    background: var(--teal-dark);
+    border-color: var(--teal-dark);
+    color: var(--white);
+  }
+
+  .cart-btn {
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    padding: 0.45rem 0.8rem;
+    border-radius: 6px;
+    transition: background 0.2s;
+  }
+
+  .cart-btn:hover { background: rgba(255,255,255,0.08); }
+
+  .cart-badge {
+    position: absolute;
+    top: -4px; right: -4px;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 0.65rem;
+    font-weight: 700;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--navy);
+    background-image: radial-gradient(ellipse at 70% 50%, #0d2a4a 0%, var(--navy) 60%);
+    color: var(--white);
+    padding: 6rem 2.5rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: 3.2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--teal);
+    color: var(--navy);
+    border: none;
+    padding: 0.8rem 1.8rem;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--teal-dark); color: var(--white); }
+
+  .btn-outline {
+    background: none;
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0.8rem 1.8rem;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .stat-num em { color: var(--teal); font-style: normal; }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+  }
+
+  .hero-card-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+  }
+
+  .quick-search {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+  }
+
+  .quick-search input {
+    flex: 1;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.65rem 1rem;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+  }
+
+  .quick-search input::placeholder { color: rgba(255,255,255,0.4); }
+  .quick-search input:focus { outline: none; border-color: var(--teal); }
+
+  .quick-search button {
+    background: var(--teal);
+    border: none;
+    border-radius: 8px;
+    padding: 0.65rem 1.2rem;
+    color: var(--navy);
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+
+  .quick-search button:hover { background: var(--teal-dark); color: var(--white); }
+
+  .popular-tests {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .test-pill {
+    background: rgba(15,163,163,0.15);
+    border: 1px solid rgba(15,163,163,0.3);
+    color: var(--teal);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .test-pill:hover { background: rgba(15,163,163,0.3); }
+
+  /* ===== SECTIONS ===== */
+  .section { padding: 4rem 2.5rem; }
+  .section-alt { background: var(--white); }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-sub {
+    color: var(--text-muted);
+    font-size: 1rem;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ===== SERVICES ===== */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    transition: all 0.25s;
+    cursor: default;
+  }
+
+  .service-card:hover {
+    border-color: var(--teal);
+    box-shadow: var(--shadow);
+    transform: translateY(-3px);
+  }
+
+  .service-icon {
+    width: 48px; height: 48px;
+    background: var(--teal-light);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .service-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--navy);
+  }
+
+  .service-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  /* ===== EXAMS SHOP ===== */
+  .filter-bar {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    justify-content: center;
+  }
+
+  .filter-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: var(--white);
+  }
+
+  .exams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .exam-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: all 0.25s;
+  }
+
+  .exam-card:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+  }
+
+  .exam-top {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    padding: 1.25rem 1.25rem 1rem;
+    position: relative;
+  }
+
+  .exam-category {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.4rem;
+  }
+
+  .exam-name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--white);
+    line-height: 1.3;
+  }
+
+  .exam-time {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: 0.3rem;
+  }
+
+  .exam-body {
+    padding: 1.25rem;
+  }
+
+  .exam-desc {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+  }
+
+  .exam-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .exam-price {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .exam-price span {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    font-family: var(--font-body);
+    margin-left: 2px;
+  }
+
+  .btn-add {
+    background: var(--teal);
+    color: var(--navy);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 7px;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .btn-add:hover { background: var(--teal-dark); color: var(--white); }
+  .btn-add.added { background: var(--success); color: var(--white); }
+
+  /* ===== CART PANEL ===== */
+  .cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,22,40,0.55);
+    z-index: 200;
+    display: none;
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+
+  .cart-overlay.open { display: flex; }
+
+  .cart-panel {
+    background: var(--white);
+    width: 380px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    animation: slideIn 0.3s ease;
+  }
+
+  @keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+
+  .cart-header {
+    background: var(--navy);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cart-header h2 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--white);
+  }
+
+  .cart-close {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.6);
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 4px;
+    transition: color 0.2s;
+  }
+
+  .cart-close:hover { color: var(--white); }
+
+  .cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.25rem;
+  }
+
+  .cart-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-muted);
+  }
+
+  .cart-empty p { font-size: 0.9rem; margin-top: 0.5rem; }
+
+  .cart-item {
+    display: flex;
+    gap: 12px;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+
+  .cart-item-icon {
+    width: 40px; height: 40px;
+    background: var(--teal-light);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .cart-item-info { flex: 1; }
+
+  .cart-item-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+
+  .cart-item-cat {
+    font-size: 0.73rem;
+    color: var(--teal-dark);
+    margin-top: 2px;
+  }
+
+  .cart-item-price {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--navy);
+    white-space: nowrap;
+  }
+
+  .cart-item-remove {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 2px;
+    transition: color 0.2s;
+    line-height: 1;
+  }
+
+  .cart-item-remove:hover { color: var(--danger); }
+
+  .cart-footer {
+    padding: 1.5rem;
+    border-top: 1px solid var(--border);
+    background: var(--cream);
+  }
+
+  .cart-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .cart-total-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  .cart-total-amount {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .btn-checkout {
+    width: 100%;
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    padding: 0.9rem;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-bottom: 0.75rem;
+  }
+
+  .btn-checkout:hover { background: var(--teal-dark); }
+
+  .btn-clear-cart {
+    width: 100%;
+    background: none;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 0.6rem;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-clear-cart:hover { border-color: var(--danger); color: var(--danger); }
+
+  /* ===== MODAL ===== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,22,40,0.6);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--white);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 480px;
+    overflow: hidden;
+    animation: fadeUp 0.3s ease;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal-header {
+    background: var(--navy);
+    padding: 1.75rem 2rem;
+    position: relative;
+  }
+
+  .modal-header h2 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--white);
+  }
+
+  .modal-header p {
+    color: rgba(255,255,255,0.55);
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1.25rem; right: 1.25rem;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .modal-close:hover { color: var(--white); }
+
+  .modal-body { padding: 1.75rem 2rem; }
+
+  .tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.75rem;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 0.6rem 1.2rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: -1px;
+  }
+
+  .tab-btn.active {
+    color: var(--navy);
+    border-bottom-color: var(--teal);
+    font-weight: 600;
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .form-group { margin-bottom: 1.25rem; }
+
+  .form-group label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+
+  .form-group input, .form-group select {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.65rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--text);
+    background: var(--white);
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--teal);
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 1.25rem;
+  }
+
+  .form-check input { width: auto; margin-top: 2px; }
+
+  .form-check label {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  .form-check a { color: var(--teal-dark); text-decoration: none; }
+
+  .btn-submit {
+    width: 100%;
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    padding: 0.85rem;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-submit:hover { background: var(--teal-dark); }
+
+  .divider {
+    text-align: center;
+    position: relative;
+    margin: 1.25rem 0;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+
+  .divider::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 50%;
+    width: calc(50% - 1.5rem);
+    height: 1px;
+    background: var(--border);
+  }
+
+  .divider::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 50%;
+    width: calc(50% - 1.5rem);
+    height: 1px;
+    background: var(--border);
+  }
+
+  .success-state {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .success-icon {
+    width: 64px; height: 64px;
+    background: #e0f7ed;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin: 0 auto 1rem;
+  }
+
+  .success-state h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .success-state p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* ===== WHY US ===== */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .feature-num {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--teal);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-title {
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.4rem;
+  }
+
+  .feature-text { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.6);
+    padding: 3rem 2.5rem 2rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .footer-brand { font-family: var(--font-display); font-size: 1.4rem; color: var(--white); margin-bottom: 0.75rem; }
+  .footer-brand span { color: var(--teal); }
+  .footer-desc { font-size: 0.85rem; line-height: 1.6; }
+
+  .footer-col h4 {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.5rem; }
+  .footer-col ul a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-col ul a:hover { color: var(--teal); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+  }
+
+  /* ===== TOAST ===== */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--navy);
+    color: var(--white);
+    padding: 0.8rem 1.25rem;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 500;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.3s;
+    border-left: 3px solid var(--teal);
+  }
+
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ===== NOTIFICATION DOT ===== */
+  .notification-dot {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+
+  .pay-method {
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-muted);
+  }
+  .pay-method:hover { border-color: var(--teal); color: var(--teal-dark); }
+  .pay-method.active { border-color: var(--teal); background: var(--teal-light); color: var(--navy); }
+
+  .pay-order-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .pay-order-row:last-child { border-bottom: none; }
+  .pay-order-row .name { color: var(--text); }
+  .pay-order-row .price { font-weight: 600; color: var(--navy); }
+
+  /* ===== MIS RESULTADOS ===== */
+  .results-section {
+    background: var(--navy);
+    background-image: radial-gradient(ellipse at 30% 80%, #0d2a4a 0%, var(--navy) 60%);
+    padding: 5rem 2.5rem;
+  }
+
+  .results-section .section-label { color: var(--teal); }
+  .results-section .section-title { color: var(--white); }
+  .results-section .section-sub { color: rgba(255,255,255,0.55); }
+
+  .results-search-box {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 860px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .results-search-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 1rem;
+    align-items: end;
+  }
+
+  .results-field label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.04em;
+  }
+
+  .results-field input {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 0.65rem 1rem;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+  }
+
+  .results-field input::placeholder { color: rgba(255,255,255,0.3); }
+  .results-field input:focus { outline: none; border-color: var(--teal); }
+
+  .btn-search-results {
+    background: var(--teal);
+    color: var(--navy);
+    border: none;
+    padding: 0.68rem 1.5rem;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    height: 42px;
+  }
+
+  .btn-search-results:hover { background: var(--teal-dark); color: var(--white); }
+
+  .results-hint {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.3);
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  .results-hint strong { color: var(--teal); font-weight: 500; }
+
+  .results-table-wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    display: none;
+  }
+
+  .results-table-wrap.visible { display: block; }
+
+  .results-count {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 1rem;
+    padding: 0 0.25rem;
+  }
+
+  .results-count strong { color: var(--teal); }
+
+  .result-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .result-card:hover { border-color: rgba(15,163,163,0.4); }
+
+  .result-card-header {
+    display: grid;
+    grid-template-columns: 56px 1fr auto auto auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.5rem;
+    cursor: pointer;
+  }
+
+  .result-sample-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    background: rgba(15,163,163,0.15);
+    border: 1px solid rgba(15,163,163,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .result-main { min-width: 0; }
+
+  .result-exam-name {
+    font-weight: 500;
+    color: var(--white);
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .result-patient {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.45);
+    margin-top: 2px;
+  }
+
+  .result-meta {
+    text-align: center;
+    min-width: 90px;
+  }
+
+  .result-meta-val {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.7);
+    font-weight: 500;
+  }
+
+  .result-meta-key {
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.3);
+    margin-top: 2px;
+    letter-spacing: 0.04em;
+  }
+
+  .result-status {
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  .status-listo { background: rgba(30,126,74,0.2); color: #5ae89a; border: 1px solid rgba(30,126,74,0.4); }
+  .status-proceso { background: rgba(200,151,58,0.2); color: #f0c060; border: 1px solid rgba(200,151,58,0.4); }
+  .status-pendiente { background: rgba(90,100,118,0.2); color: rgba(255,255,255,0.45); border: 1px solid rgba(90,100,118,0.3); }
+
+  .result-toggle {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.35);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 4px;
+    transition: all 0.2s;
+    line-height: 1;
+  }
+
+  .result-toggle:hover { color: var(--teal); }
+  .result-toggle.open { transform: rotate(180deg); color: var(--teal); }
+
+  .result-detail {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 1.25rem 1.5rem;
+    display: none;
+  }
+
+  .result-detail.open { display: block; }
+
+  .result-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .result-param {
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    border-left: 2px solid transparent;
+  }
+
+  .result-param.normal { border-left-color: #5ae89a; }
+  .result-param.alto { border-left-color: #f07070; }
+  .result-param.bajo { border-left-color: #f0c060; }
+
+  .result-param-name {
+    font-size: 0.73rem;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 4px;
+    letter-spacing: 0.03em;
+  }
+
+  .result-param-value {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .result-param-ref {
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.3);
+    margin-top: 2px;
+  }
+
+  .result-param.alto .result-param-value { color: #f07070; }
+  .result-param.bajo .result-param-value { color: #f0c060; }
+
+  .result-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-result-action {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.65);
+    padding: 0.45rem 1rem;
+    border-radius: 7px;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .btn-result-action:hover { border-color: var(--teal); color: var(--teal); }
+
+  .no-results-msg {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: rgba(255,255,255,0.3);
+    font-size: 0.9rem;
+    display: none;
+  }
+
+  .no-results-msg.visible { display: block; }
+  .no-results-msg .icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+
+  /* ===== VIDEO CARD ===== */
+  .video-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .video-badge {
+    background: var(--navy);
+    color: var(--teal);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    border: 1px solid rgba(15,163,163,0.3);
+  }
+
+  .video-thumb-wrap {
+    position: relative;
+    width: 220px;
+    height: 390px;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(10,22,40,0.18);
+    border: 2px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+    background: var(--navy-mid);
+  }
+
+  .video-thumb-wrap:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(10,22,40,0.22);
+  }
+
+  .video-thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .video-play-btn {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 52px; height: 52px;
+    background: rgba(255,255,255,0.92);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--navy);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    transition: transform 0.2s, background 0.2s;
+    padding-left: 3px;
+  }
+
+  .video-thumb-wrap:hover .video-play-btn {
+    transform: translate(-50%, -50%) scale(1.1);
+    background: var(--teal);
+    color: var(--white);
+  }
+
+  .video-overlay-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(10,22,40,0.85));
+    color: var(--white);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 1.5rem 0.75rem 0.65rem;
+    text-align: center;
+  }
+
+  .video-caption {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* ===== CITAS ===== */
+  .citas-container {
+    max-width: 780px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .citas-step {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    transition: all 0.3s;
+  }
+
+  .citas-step-locked {
+    opacity: 0.45;
+    pointer-events: none;
+    filter: grayscale(0.3);
+  }
+
+  .citas-step-locked.unlocked {
+    opacity: 1;
+    pointer-events: all;
+    filter: none;
+  }
+
+  .citas-step-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .citas-step-num {
+    width: 36px; height: 36px;
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .citas-step-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--navy);
+  }
+
+  .citas-step-sub {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .citas-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .citas-calendar-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 0 0.25rem;
+  }
+
+  .citas-cal-arrow {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    width: 32px; height: 32px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .citas-cal-arrow:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+  .citas-calendar {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.6rem;
+  }
+
+  .cal-day {
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 0.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .cal-day:hover { border-color: var(--teal); background: var(--teal-light); }
+
+  .cal-day.selected { border-color: var(--navy); background: var(--navy); color: var(--white); }
+
+  .cal-day.past { opacity: 0.35; pointer-events: none; }
+
+  .cal-day-name {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .cal-day.selected .cal-day-name { color: rgba(255,255,255,0.65); }
+
+  .cal-day-num {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+  }
+
+  .cal-day.selected .cal-day-num { color: var(--white); }
+
+  .cal-day-month {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .cal-day.selected .cal-day-month { color: rgba(255,255,255,0.6); }
+
+  .citas-slots {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 0.6rem;
+  }
+
+  .slot-btn {
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 0.6rem 0.5rem;
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    background: var(--white);
+    transition: all 0.2s;
+    color: var(--text);
+  }
+
+  .slot-btn:hover { border-color: var(--teal); color: var(--teal-dark); background: var(--teal-light); }
+  .slot-btn.selected { border-color: var(--navy); background: var(--navy); color: var(--white); }
+  .slot-btn.taken { opacity: 0.35; pointer-events: none; background: var(--cream); text-decoration: line-through; }
+
+  .citas-confirm-box {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    text-align: left;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  .citas-confirm-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.85rem;
+  }
+
+  .citas-confirm-row:last-child { border-bottom: none; }
+  .citas-confirm-row span:first-child { color: var(--text-muted); }
+  .citas-confirm-row span:last-child { font-weight: 600; color: var(--navy); }
+
+  /* ===== CHATBOT ===== */
+  .chatbot-bubble {
+    position: fixed;
+    bottom: 1.75rem;
+    right: 1.75rem;
+    width: 58px; height: 58px;
+    background: var(--navy);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 600;
+    box-shadow: 0 4px 20px rgba(10,22,40,0.35);
+    transition: transform 0.2s, background 0.2s;
+    font-size: 1.4rem;
+  }
+
+  .chatbot-bubble:hover { transform: scale(1.08); background: var(--teal-dark); }
+
+  .chatbot-unread {
+    position: absolute;
+    top: -3px; right: -3px;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 0.65rem;
+    font-weight: 700;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .chatbot-window {
+    position: fixed;
+    bottom: 5.5rem;
+    right: 1.75rem;
+    width: 360px;
+    height: 500px;
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 8px 40px rgba(10,22,40,0.22);
+    z-index: 600;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    animation: chatIn 0.25s ease;
+  }
+
+  @keyframes chatIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .chatbot-window.open { display: flex; }
+
+  .chatbot-header {
+    background: var(--navy);
+    padding: 0.9rem 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  .chatbot-avatar {
+    width: 34px; height: 34px;
+    background: rgba(15,163,163,0.25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+  }
+
+  .chatbot-close {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: color 0.2s;
+  }
+
+  .chatbot-close:hover { color: var(--white); }
+
+  .chatbot-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .chat-msg {
+    max-width: 82%;
+    padding: 0.65rem 0.9rem;
+    border-radius: 12px;
+    font-size: 0.84rem;
+    line-height: 1.45;
+    animation: msgIn 0.2s ease;
+  }
+
+  @keyframes msgIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .chat-msg.bot {
+    background: var(--cream);
+    color: var(--text);
+    border-bottom-left-radius: 3px;
+    align-self: flex-start;
+  }
+
+  .chat-msg.user {
+    background: var(--navy);
+    color: var(--white);
+    border-bottom-right-radius: 3px;
+    align-self: flex-end;
+  }
+
+  .chat-msg.typing {
+    background: var(--cream);
+    align-self: flex-start;
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    padding: 0.5rem 0.9rem;
+  }
+
+  .chatbot-quick-btns {
+    padding: 0 0.8rem 0.6rem;
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+
+  .chat-quick {
+    background: var(--teal-light);
+    border: 1px solid rgba(15,163,163,0.3);
+    color: var(--teal-dark);
+    border-radius: 20px;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.75rem;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .chat-quick:hover { background: var(--teal); color: var(--white); border-color: var(--teal); }
+
+  .chatbot-input-row {
+    display: flex;
+    gap: 0;
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .chatbot-input-row input {
+    flex: 1;
+    border: none;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--text);
+    outline: none;
+  }
+
+  .chatbot-input-row button {
+    background: var(--navy);
+    border: none;
+    color: var(--white);
+    padding: 0 1.1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .chatbot-input-row button:hover { background: var(--teal-dark); }
+
+  @media (max-width: 900px) {
+    .results-search-grid { grid-template-columns: 1fr 1fr; }
+    .result-card-header { grid-template-columns: 44px 1fr auto; }
+    .result-meta { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .hero h1 { font-size: 2.4rem; }
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 1rem; }
+    .nav-links { display: none; }
+    .section { padding: 3rem 1rem; }
+    .hero { padding: 3rem 1rem; }
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 <body>
-    <!-- Navbar -->
-    <header>
-        <button id="toggleMenu" style="position: absolute; top: 20px; right: 20px;">Mostrar/Ocultar Menú</button>
-        <ul class="menu" id="menu" style="display: none;">
-            <li><a href="#home">Inicio</a></li>
-            <li><a href="#productos">Productos</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-            <li><a href="#carrito" id="carrito-link">Carrito (<span id="carrito-count">0</span>)</a></li>
-            <li><a href="https://api.whatsapp.com/send/?phone=58415734&text&type=phone_number&app_absent=0" target="_blank">
-                <img src="https://www.lavanguardia.com/andro4all/hero/2020/01/WHATSAPP.1660127863.603.jpg?width=768&aspect_ratio=16:9&format=nowebp" alt="Apple" style="width: 100%; max-width: 250px; display: block;">
-            </a></li>
-            <li><a href="https://www.facebook.com/share/18FdbX3YdR/?mibextid=wwXIfr" target="_blank">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzNG1T7rCCm0iqy__nPVYj1mwLlZkHjLHUoQ&s" alt="Apple" style="width: 80%; max-width: 250px; display: block;">
-            </a></li>
-            <li><a href="https://www.instagram.com/almacen_el_pijije?igsh=dDZ6dzBicG04cG92&utm_source=qr" target="_blank">
-                <img src="https://png.pngtree.com/png-clipart/20190613/original/pngtree-instagram-logo-icon-png-image_3588833.jpg" alt="Apple" style="width: 80%; max-width: 250px; display: block;">
-            </a></li>
-        </ul>
-    </header>
-    
-    <!-- Marquesina -->
-   
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <p></p>
-            <h2>  ¡BIENVENIDOS!</h2>
-            <H2>al mejor almacén de computadoras</H2>
-            <p>   Las mejores ofertas en computadoras de alto rendimiento.</p>
-            <a href="#productos" class="btn"> Ver Productos </a>
-        
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span class="dot"></span>
+    Bio<span>Lab</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#examenes">Exámenes</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#citas">Citas</a></li>
+    <li><a href="#resultados">Mis Resultados</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="cart-btn" onclick="openCart()">
+      🧪 Carrito
+      <div class="cart-badge" id="cartBadge">0</div>
+    </button>
+    <!-- Logged OUT -->
+    <div id="navLoggedOut" style="display:flex;gap:0.6rem;align-items:center;">
+      <button class="btn-nav" onclick="openModal('login')">Iniciar sesión</button>
+      <button class="btn-nav btn-nav-primary" onclick="openModal('register')">Registrarse</button>
+    </div>
+    <!-- Logged IN -->
+    <div id="navLoggedIn" style="display:none;align-items:center;gap:0.75rem;">
+      <div style="display:flex;align-items:center;gap:8px;cursor:pointer;" onclick="toggleUserMenu()">
+        <div id="navAvatar" style="width:32px;height:32px;border-radius:50%;background:var(--teal);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;"></div>
+        <span id="navUserName" style="font-size:0.85rem;color:rgba(255,255,255,0.85);max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
+        <span style="color:rgba(255,255,255,0.4);font-size:0.7rem;">▼</span>
+      </div>
+      <div id="userMenu" style="display:none;position:absolute;top:62px;right:1.5rem;background:var(--white);border-radius:10px;box-shadow:0 8px 32px rgba(10,22,40,0.18);border:1px solid var(--border);min-width:200px;z-index:200;overflow:hidden;">
+        <div id="userMenuHeader" style="padding:1rem;background:var(--navy);"></div>
+        <div style="padding:0.4rem 0;">
+          <a href="#resultados" onclick="closeUserMenu()" style="display:block;padding:0.6rem 1rem;font-size:0.85rem;color:var(--text);text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background='transparent'">📋 Mis resultados</a>
+          <a href="#citas" onclick="closeUserMenu()" style="display:block;padding:0.6rem 1rem;font-size:0.85rem;color:var(--text);text-decoration:none;" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background='transparent'">📅 Mis citas</a>
+          <div style="border-top:1px solid var(--border);margin:0.3rem 0;"></div>
+          <button onclick="logout()" style="width:100%;text-align:left;padding:0.6rem 1rem;font-size:0.85rem;color:var(--danger);background:none;border:none;cursor:pointer;font-family:var(--font-body);" onmouseover="this.style.background='#fff0f0'" onmouseout="this.style.background='transparent'">🚪 Cerrar sesión</button>
         </div>
-        <p></p>
-        <img src="logo.png.jpg" alt="Logo" class="hero-logo">
-        <div style="display: flex; justify-content: space-between; max-width: 100%; width: 100%; margin: 0 auto;">
-            <!-- Primer bloque (izquierda) -->
-          
+      </div>
+    </div>
+  </div>
+</nav>
 
-            <!-- Segundo bloque (derecha) -->
-            <div style="text-align: right;">
-               <CEnter> <p>Ofertas en Apple   </p></CEnter>
-                <a href="https://www.apple.com/la/macbook-pro/" target="_blank">
-                    <img src="https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111901_mbp16-gray.png" alt="Apple" style="width: 100%; max-width: 250px; display: block;">
-                </a>
-            </div>
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <p class="hero-label">Laboratorio Clínico Certificado</p>
+    <h1>Resultados <em>precisos</em> para su tranquilidad</h1>
+    <p>Ofrecemos más de 400 análisis clínicos con los más altos estándares de calidad. Resultados rápidos, seguros y disponibles en línea.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('examenes').scrollIntoView({behavior:'smooth'})">Ver exámenes</button>
+      <button class="btn-outline" onclick="openModal('register')">Crear cuenta</button>
+    </div>
+    <br>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">400<em>+</em></div>
+        <div class="stat-label">Tipos de análisis</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">24<em>h</em></div>
+        <div class="stat-label">Resultados rápidos</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">15<em>k</em></div>
+        <div class="stat-label">Pacientes atendidos</div>
+      </div>
+    </div>
+  </div>
 
-            <!-- Tercer bloque (izquierda) -->
-            <div style="text-align: left;">
-                <CEnter>  <p>  Ofertas en DELL</p></CEnter>
-                <a href="https://www.dell.com/es-gt/lp" target="_blank">
-                    <img src="https://i.ytimg.com/vi/EyooDTDUkhU/maxresdefault.jpg" alt="DELL" style="width: 100%; max-width: 250px; display: block;">
-                </a>
-            </div>
+  <div class="hero-card">
+    <p class="hero-card-title">Buscar un examen</p>
+    <div class="quick-search">
+      <input type="text" id="searchInput" placeholder="Ej: hemograma, glucosa..." oninput="filterExams()">
+      <button onclick="document.getElementById('examenes').scrollIntoView({behavior:'smooth'})">Buscar</button>
+    </div>
+    <p style="font-size:0.75rem; color:rgba(255,255,255,0.4); margin-bottom:0.6rem;">Análisis frecuentes:</p>
+    <div class="popular-tests">
+      <span class="test-pill" onclick="filterByName('Hemograma')">Hemograma</span>
+      <span class="test-pill" onclick="filterByName('Glucosa')">Glucosa</span>
+      <span class="test-pill" onclick="filterByName('Colesterol')">Colesterol</span>
+      <span class="test-pill" onclick="filterByName('PCR')">PCR</span>
+      <span class="test-pill" onclick="filterByName('TSH')">Tiroides</span>
+    </div>
+  </div>
+</section>
 
-            <!-- Cuarto bloque (derecha) -->
-            <div style="text-align: right;">
-                <CEnter>  <p>Ofertas en HP    </p></CEnter>
-                <a href="https://www.hp.com/lamerica_nsc_cnt_amer-es/laptops-and-2-in-1s/spectre.html" target="_blank">
-                    <img src="https://img-cdn.tnwcdn.com/image?fit=1200%2C675&height=675&url=https%3A%2F%2Fcdn0.tnwcdn.com%2Fwp-content%2Fblogs.dir%2F1%2Ffiles%2F2021%2F08%2FHP-Spectre-x360-14-1-of-7.jpg&signature=be2373b43e1088c3457ffd4f53fd987a" alt="HP" style="width: 100%; max-width: 250px; display: block;">
-                </a>
-            </div>
+<!-- SERVICIOS -->
+<section class="section section-alt" id="servicios">
+  <div class="section-header">
+    <p class="section-label">Lo que hacemos</p>
+    <h2 class="section-title">Nuestros servicios</h2>
+    <p class="section-sub">Atención de calidad con tecnología de vanguardia para el diagnóstico preciso.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🩸</div>
+      <h3>Hematología</h3>
+      <p>Análisis completos de sangre, hemogramas, coagulación y biometría hemática.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🧬</div>
+      <h3>Genética Molecular</h3>
+      <p>Pruebas de PCR, detección de enfermedades genéticas y análisis moleculares avanzados.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚗️</div>
+      <h3>Bioquímica</h3>
+      <p>Glucosa, perfil lipídico, función hepática, renal y exámenes metabólicos completos.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔬</div>
+      <h3>Microbiología</h3>
+      <p>Cultivos, antibiogramas, parasitología y detección de agentes infecciosos.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏠</div>
+      <h3>Toma a domicilio</h3>
+      <p>Personal capacitado que acude a su hogar para la toma de muestras.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📱</div>
+      <h3>Resultados en línea</h3>
+      <p>Acceda a sus resultados desde cualquier dispositivo de forma segura y privada.</p>
+    </div>
+  </div>
+
+  <!-- VIDEO MINIATURA -->
+  <div style="display:flex;justify-content:center;margin-top:3rem;">
+    <div class="video-card">
+      <div class="video-badge">▶ Video</div>
+      <a href="https://youtube.com/shorts/LwEjAMuGjsA" target="_blank" rel="noopener" class="video-thumb-wrap" style="text-decoration:none;">
+        <img src="https://i.ytimg.com/vi/LwEjAMuGjsA/hqdefault.jpg" alt="Video BioLab" class="video-thumb-img"
+          onerror="this.style.display='none';document.getElementById('videoFallback').style.display='flex'">
+        <div id="videoFallback" style="display:none;width:100%;height:100%;background:var(--navy-mid);align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;border-radius:10px;">
+          <span style="font-size:2.5rem;">🧪</span>
         </div>
-        <style>
-            @media (max-width: 768px) {
-                div {
-                    flex-direction: column;
-                    align-items: center;
-                }
-            }
-        </style>
-    </section>
+        <div class="video-play-btn">▶</div>
+        <div class="video-overlay-label">Conozca BioLab</div>
+      </a>
+      <p class="video-caption">Ver en YouTube →</p>
+    </div>
+  </div>
+</section>
 
-    <!-- marquesina -->
-    <section class="marquesina">
-        <h1><div>¡La tecnología que necesitas, al alcance de tu mano, a solo un click!</div></h1>
-    </section>
+<!-- EXÁMENES TIENDA -->
+<section class="section" id="examenes">
+  <div class="section-header">
+    <p class="section-label">Catálogo</p>
+    <h2 class="section-title">Exámenes disponibles</h2>
+    <p class="section-sub">Seleccione los análisis que necesita y agréguelos a su carrito.</p>
+  </div>
 
-    <!-- Contador de visitas -->
-   
+  <div class="filter-bar" id="filterBar">
+    <button class="filter-btn active" onclick="setFilter(this, 'todos')">Todos</button>
+    <button class="filter-btn" onclick="setFilter(this, 'hematologia')">Hematología</button>
+    <button class="filter-btn" onclick="setFilter(this, 'bioquimica')">Bioquímica</button>
+    <button class="filter-btn" onclick="setFilter(this, 'hormonal')">Hormonal</button>
+    <button class="filter-btn" onclick="setFilter(this, 'microbiologia')">Microbiología</button>
+    <button class="filter-btn" onclick="setFilter(this, 'molecular')">Molecular</button>
+  </div>
 
-    <!-- Video Publicitario -->
-    <section id="video-publicitario">
-        <h2>¡Mira nuestro video Sobre la Macbook Air!</h2>
-        <video width="80%" height="400" controls>
-            <source src="apple.mp4" type="video/mp4">
-            Tu navegador no soporta la etiqueta de video.
-        </video>
-    </section>
+  <div class="exams-grid" id="examsGrid"></div>
+</section>
 
-    <!-- Gif Publicitario -->
-    <section id="gif-publicitario" style="text-align: center; margin-top: 30px;">
-        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExem9neGtwMzE2MDlhdmp5Y29lbGlhZnRrejU2a2IzYnB1dWNmZTh1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fVWMzA9oMeeLqG0ruE/giphy.gif" alt="Lenovo Gif" style="width: 100%; max-width: 500px;">
-    </section>
+<!-- POR QUÉ NOSOTROS -->
+<section class="section section-alt" id="nosotros">
+  <div class="section-header">
+    <p class="section-label">Nuestra experiencia</p>
+    <h2 class="section-title">¿Por qué elegirnos?</h2>
+  </div>
+  <div class="features-grid">
+    <div>
+      <div class="feature-num">20+</div>
+      <p class="feature-title">Años de experiencia</p>
+      <p class="feature-text">Dos décadas brindando diagnósticos confiables a miles de pacientes.</p>
+    </div>
+    <div>
+      <div class="feature-num">ISO</div>
+      <p class="feature-title">Certificación internacional</p>
+      <p class="feature-text">Certificados bajo norma ISO 15189 para laboratorios clínicos.</p>
+    </div>
+    <div>
+      <div class="feature-num">98%</div>
+      <p class="feature-title">Satisfacción del paciente</p>
+      <p class="feature-text">Compromiso total con la calidad y la experiencia del paciente.</p>
+    </div>
+    <div>
+      <div class="feature-num">6h</div>
+      <p class="feature-title">Tiempo promedio</p>
+      <p class="feature-text">La mayoría de resultados listos en menos de 6 horas.</p>
+    </div>
+  </div>
+</section>
 
-    <!-- Buscador -->
-    <section class="buscador">
-        <input type="text" id="search-input" placeholder="Buscar producto..." oninput="buscarProducto()">
-    </section>
+<!-- CITAS -->
+<section class="section section-alt" id="citas">
+  <div class="section-header">
+    <p class="section-label">Agendamiento en línea</p>
+    <h2 class="section-title">Agendar una cita</h2>
+    <p class="section-sub">Seleccione el tipo de examen, fecha y horario disponible. Atendemos de lunes a viernes de 7:00 am a 4:00 pm.</p>
+  </div>
 
-    <!-- Botón para descargar promociones -->
-    <section class="download-section" style="text-align: center;">
-        <a href="promociones.pdf" class="btn-promociones" download="promociones">Descargar Promociones Del Mes</a>
-    </section>
-
-    <!-- Productos -->
-    <section id="productos" class="productos">
-        <h2>Ofertas Especiales</h2>
-        <div class="product-cards" id="productos-list">
-            <!-- Los productos se cargarán aquí dinámicamente -->
+  <div class="citas-container">
+    <!-- Paso 1: Datos del paciente -->
+    <div class="citas-step" id="citaStep1">
+      <div class="citas-step-header">
+        <div class="citas-step-num">1</div>
+        <div>
+          <p class="citas-step-title">Datos del paciente</p>
+          <p class="citas-step-sub">Ingrese su información personal</p>
         </div>
-    </section>
-
-    <!-- Carrito -->
-    <section id="carrito" class="carrito">
-        <h2>Tu Carrito</h2>
-        <div id="carrito-items" class="carrito-items">
-            <!-- Aquí aparecerán los productos del carrito -->
+      </div>
+      <div class="citas-form-grid">
+        <div class="form-group">
+          <label>Nombre completo</label>
+          <input type="text" id="citaNombre" placeholder="Juan García López">
         </div>
-        <div id="total-carrito" class="total">
-            <p>Total: Q<span id="total-price">0.00</span></p>
-            <button onclick="limpiarCarrito()">Limpiar Carrito</button>
-            <button onclick="finalizarCompra()">Finalizar Compra</button>
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <input type="email" id="citaEmail" placeholder="correo@ejemplo.com">
         </div>
-    </section>
-
-    <!-- Contacto -->
-    <section id="contacto" class="contacto">
-        <h2>Formulario de Contacto</h2>
-        <form action="https://formspree.io/f/mgvogqna" method="POST" class="form-contacto">
-            <div class="form-group">
-                <input type="text" name="Nombre" placeholder="Nombre y Apellido" required>
-            </div>
-            <div class="form-group">
-                <input type="tel" name="Telefono" placeholder="Teléfono" required>
-            </div>
-            <div class="form-group">
-                <input type="email" name="Correo" placeholder="Correo Electrónico" required>
-            </div>
-            <div class="form-group">
-                <select name="Asunto" required>
-                    <option value="" disabled selected>Seleccione Asunto</option>
-                    <option>Consulta</option>
-                    <option>Pedido</option>
-                    <option>Queja</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <textarea name="Mensaje" placeholder="Escribe tu mensaje..." required></textarea>
-            </div>
-            <div class="form-group">
-                <label class="checkbox-label">
-                    <input type="checkbox" name="terminos" required> Acepto los <a href="#" class="link-terminos">términos y condiciones</a>
-                </label>
-            </div>
-            <button type="submit" class="btn-submit">Enviar</button>
-        </form>
-    </section>
-    <section id="counter">
-        <div id="visit-count">
-            Visitas: <span id="contador-visitas">0</span>
+        <div class="form-group">
+          <label>Teléfono de contacto</label>
+          <input type="tel" id="citaTel" placeholder="5555-0000">
         </div>
-    </section>
-    <!-- Footer -->
-    <footer>
-        <p> 2025 Almacen De Computadoras . Liceo Valle Del Sol, Alfredo Ramazzini 5to BACO.</p>
-        
-    </footer>
+        <div class="form-group">
+          <label>Tipo de examen</label>
+          <select id="citaExamen">
+            <option value="">-- Seleccione un examen --</option>
+            <option value="Hemograma completo">🩸 Hemograma completo</option>
+            <option value="Glucosa en ayuno">🍬 Glucosa en ayuno</option>
+            <option value="Perfil lipídico">💛 Perfil lipídico</option>
+            <option value="TSH (Tiroides)">🔵 TSH (Tiroides)</option>
+            <option value="PCR Cuantitativa">🧬 PCR Cuantitativa</option>
+            <option value="Perfil hepático">🟤 Perfil hepático</option>
+            <option value="Proteína C Reactiva">⚗️ Proteína C Reactiva</option>
+            <option value="Tiempo de coagulación">🩺 Tiempo de coagulación</option>
+            <option value="Urocultivo">🔬 Urocultivo</option>
+            <option value="Panel respiratorio viral">🫁 Panel respiratorio viral</option>
+            <option value="Otro / Consultar">📋 Otro / Consultar</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" style="margin-top:0.5rem;">
+        <label>Indicaciones médicas u observaciones (opcional)</label>
+        <input type="text" id="citaObs" placeholder="Ej: El médico indicó ayuno de 12 horas">
+      </div>
+      <button class="btn-primary" style="margin-top:1.25rem;" onclick="citaNextStep(1)">Continuar →</button>
+    </div>
 
-    <script>
-        // Función para el contador de visitas
-        let visitas = localStorage.getItem('visitas') ? parseInt(localStorage.getItem('visitas')) : 0;
-        visitas++;
-        localStorage.setItem('visitas', visitas);
-        document.getElementById('contador-visitas').innerText = visitas;
-    </script>
+    <!-- Paso 2: Fecha -->
+    <div class="citas-step citas-step-locked" id="citaStep2">
+      <div class="citas-step-header">
+        <div class="citas-step-num">2</div>
+        <div>
+          <p class="citas-step-title">Seleccionar fecha</p>
+          <p class="citas-step-sub">Solo días hábiles — lunes a viernes</p>
+        </div>
+      </div>
+      <div class="citas-calendar-nav">
+        <button class="citas-cal-arrow" onclick="calPrevWeek()">‹</button>
+        <span id="calWeekLabel" style="font-weight:600;font-size:0.95rem;color:var(--navy)"></span>
+        <button class="citas-cal-arrow" onclick="calNextWeek()">›</button>
+      </div>
+      <div class="citas-calendar" id="calDays"></div>
+      <button class="btn-primary" style="margin-top:1.5rem;" onclick="citaNextStep(2)">Continuar →</button>
+    </div>
 
-    <script src="scripts.js"></script>
+    <!-- Paso 3: Hora -->
+    <div class="citas-step citas-step-locked" id="citaStep3">
+      <div class="citas-step-header">
+        <div class="citas-step-num">3</div>
+        <div>
+          <p class="citas-step-title">Seleccionar horario</p>
+          <p class="citas-step-sub">Horarios disponibles para la fecha elegida</p>
+        </div>
+      </div>
+      <div class="citas-slots" id="citaSlots"></div>
+      <button class="btn-primary" style="margin-top:1.5rem;" onclick="citaNextStep(3)">Confirmar cita →</button>
+    </div>
+
+    <!-- Confirmación -->
+    <div class="citas-step citas-step-locked" id="citaStep4">
+      <div style="text-align:center;padding:1.5rem 0;">
+        <div style="font-size:3rem;margin-bottom:1rem;">📅</div>
+        <h3 style="font-family:var(--font-display);font-size:1.4rem;color:var(--navy);margin-bottom:0.5rem;">¡Cita agendada!</h3>
+        <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1.5rem;">Recibirá una confirmación en su correo electrónico.</p>
+        <div class="citas-confirm-box" id="citaConfirmBox"></div>
+        <button class="btn-primary" style="margin-top:1.5rem;" onclick="resetCitas()">Agendar otra cita</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MIS RESULTADOS -->
+<section class="results-section" id="resultados">
+  <div class="section-header">
+    <p class="section-label">Portal del paciente</p>
+    <h2 class="section-title">Mis resultados</h2>
+    <p class="section-sub">Consulte sus análisis por fecha, número de muestra o nombre del paciente.</p>
+  </div>
+
+  <div class="results-search-box">
+    <div class="results-search-grid">
+      <div class="results-field">
+        <label>Nombre del paciente</label>
+        <input type="text" id="srNombre" placeholder="Ej: Juan García">
+      </div>
+      <div class="results-field">
+        <label>Número de muestra</label>
+        <input type="text" id="srMuestra" placeholder="Ej: BL-2024-0891">
+      </div>
+      <div class="results-field">
+        <label>Fecha del examen</label>
+        <input type="date" id="srFecha">
+      </div>
+      <button class="btn-search-results" onclick="buscarResultados()">🔍 Buscar</button>
+    </div>
+    <p class="results-hint">Puede combinar uno o más campos para refinar su búsqueda. Los datos de muestra son de <strong>demostración</strong>.</p>
+  </div>
+
+  <div class="results-table-wrap" id="resultsTableWrap">
+    <p class="results-count" id="resultsCount"></p>
+    <div id="resultsList"></div>
+  </div>
+
+  <div class="no-results-msg" id="noResultsMsg">
+    <div class="icon">🔎</div>
+    <p>No se encontraron resultados con los criterios ingresados.</p>
+    <p style="margin-top:0.4rem; font-size:0.8rem;">Intente con un nombre, número de muestra o fecha diferente.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contacto">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Bio<span>Lab</span></div>
+      <p class="footer-desc">Laboratorio clínico certificado comprometido con la precisión diagnóstica y el bienestar de nuestros pacientes.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#">Hematología</a></li>
+        <li><a href="#">Bioquímica</a></li>
+        <li><a href="#">Microbiología</a></li>
+        <li><a href="#">Toma domiciliaria</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Pacientes</h4>
+      <ul>
+        <li><a href="#" onclick="openModal('register'); return false;">Crear cuenta</a></li>
+        <li><a href="#" onclick="openModal('login'); return false;">Ver resultados</a></li>
+        <li><a href="#" onclick="openCitasModal(); return false;">Agendar cita</a></li>
+        <li><a href="#">Instrucciones</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="#">📍 Ciudad de Guatemala</a></li>
+        <li><a href="#">📞 (502) 2200-0000</a></li>
+        <li><a href="#">✉️ info@biolab.gt</a></li>
+        <li><a href="#">🕐 Lun-Sáb 6am-6pm</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 BioLab — Laboratorio Clínico. Todos los derechos reservados.</span>
+    <span>Privacidad · Términos · Cookies</span>
+  </div>
+</footer>
+
+<!-- CART PANEL -->
+<div class="cart-overlay" id="cartOverlay" onclick="handleOverlayClick(event)">
+  <div class="cart-panel">
+    <div class="cart-header">
+      <h2>🛒 Mi carrito</h2>
+      <button class="cart-close" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">
+        <div style="font-size:2.5rem">🧪</div>
+        <p>No hay exámenes en su carrito.</p>
+      </div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span class="cart-total-label">Total estimado:</span>
+        <span class="cart-total-amount" id="cartTotal">Q0.00</span>
+      </div>
+      <button class="btn-checkout" onclick="checkout()">Solicitar exámenes →</button>
+      <button class="btn-clear-cart" onclick="clearCart()">Vaciar carrito</button>
+    </div>
+  </div>
+</div>
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleModalOverlay(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="modalTitle">Mi cuenta</h2>
+      <p id="modalSub">Acceda a sus resultados en línea</p>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="tabs" id="authTabs">
+        <button class="tab-btn active" id="tabLogin" onclick="switchTab('login')">Iniciar sesión</button>
+        <button class="tab-btn" id="tabRegister" onclick="switchTab('register')">Registrarse</button>
+      </div>
+
+      <!-- LOGIN -->
+      <div class="tab-content active" id="contentLogin">
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <input type="email" placeholder="paciente@ejemplo.com" id="loginEmail">
+        </div>
+        <div class="form-group">
+          <label>Contraseña</label>
+          <input type="password" placeholder="••••••••" id="loginPass">
+        </div>
+        <p id="loginError" style="color:#b03030;font-size:0.8rem;margin:-0.5rem 0 0.75rem;display:none;">Correo o contraseña incorrectos. Intente de nuevo.</p>
+        <button class="btn-submit" onclick="handleLogin()">Iniciar sesión</button>
+        <div class="divider">o</div>
+        <p style="text-align:center; font-size:0.83rem; color:var(--text-muted)">
+          ¿No tiene cuenta? <a href="#" style="color:var(--teal-dark); text-decoration:none;" onclick="switchTab('register'); return false;">Regístrese gratis</a>
+        </p>
+      </div>
+
+      <!-- REGISTER -->
+      <div class="tab-content" id="contentRegister">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" placeholder="Juan" id="regNombre">
+          </div>
+          <div class="form-group">
+            <label>Apellido</label>
+            <input type="text" placeholder="García" id="regApellido">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <input type="email" placeholder="correo@ejemplo.com" id="regEmail">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Teléfono</label>
+            <input type="tel" placeholder="5555-0000" id="regTel">
+          </div>
+          <div class="form-group">
+            <label>Fecha de nacimiento</label>
+            <input type="date" id="regFecha">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>DPI / Pasaporte</label>
+          <input type="text" placeholder="Número de identificación" id="regDpi">
+        </div>
+        <div class="form-group">
+          <label>Contraseña</label>
+          <input type="password" placeholder="Mínimo 8 caracteres" id="regPass">
+        </div>
+        <div class="form-check">
+          <input type="checkbox" id="regTerms">
+          <label for="regTerms">Acepto los <a href="#">Términos de uso</a> y la <a href="#">Política de privacidad</a> de BioLab.</label>
+        </div>
+        <button class="btn-submit" onclick="handleRegister()">Crear mi cuenta</button>
+      </div>
+
+      <!-- SUCCESS (login/register) -->
+      <div class="tab-content" id="contentSuccess">
+        <div class="success-state">
+          <div class="success-icon">✅</div>
+          <h3 id="successTitle">¡Bienvenido!</h3>
+          <p id="successMsg">Ha iniciado sesión correctamente.</p>
+          <br>
+          <button class="btn-submit" onclick="closeModal()" style="max-width:200px; margin:0 auto; display:block;">Continuar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHATBOT -->
+<div class="chatbot-bubble" id="chatBubble" onclick="toggleChat()">
+  <span id="chatBubbleIcon">💬</span>
+  <div class="chatbot-unread" id="chatUnread">1</div>
+</div>
+
+<div class="chatbot-window" id="chatWindow">
+  <div class="chatbot-header">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="chatbot-avatar">🤖</div>
+      <div>
+        <p style="font-weight:600;font-size:0.9rem;color:var(--white);">BioBot</p>
+        <p style="font-size:0.72rem;color:rgba(255,255,255,0.55);">Asistente de BioLab · En línea</p>
+      </div>
+    </div>
+    <button class="chatbot-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chatbot-messages" id="chatMessages"></div>
+  <div class="chatbot-quick-btns" id="chatQuickBtns"></div>
+  <div class="chatbot-input-row">
+    <input type="text" id="chatInput" placeholder="Escriba su pregunta..." onkeydown="if(event.key==='Enter') sendChatMsg()">
+    <button onclick="sendChatMsg()">➤</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span id="toastMsg">Examen agregado</span>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div class="modal-overlay" id="payModalOverlay" onclick="handlePayOverlay(event)" style="z-index:400;">
+  <div class="modal" style="max-width:520px;">
+    <div class="modal-header">
+      <h2 id="payModalTitle">Completar pedido</h2>
+      <p id="payModalSub">Ingrese sus datos de pago</p>
+      <button class="modal-close" onclick="closePayModal()">✕</button>
+    </div>
+    <div class="modal-body" id="payModalBody">
+
+      <!-- STEP 1: resumen + método -->
+      <div id="payStep1">
+        <p style="font-size:0.8rem;font-weight:600;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:0.75rem;text-transform:uppercase;">Resumen del pedido</p>
+        <div id="payOrderSummary" style="margin-bottom:1.25rem;border:1px solid var(--border);border-radius:8px;overflow:hidden;"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;padding:0 0.25rem;">
+          <span style="font-size:0.9rem;color:var(--text-muted);">Total a pagar</span>
+          <span id="payTotal" style="font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--navy);"></span>
+        </div>
+
+        <p style="font-size:0.8rem;font-weight:600;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:0.75rem;text-transform:uppercase;">Método de pago</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:1.5rem;">
+          <div class="pay-method active" id="methodCard" onclick="selectMethod('card')">
+            <span style="font-size:1.2rem;">💳</span>
+            <span>Tarjeta</span>
+          </div>
+          <div class="pay-method" id="methodTransfer" onclick="selectMethod('transfer')">
+            <span style="font-size:1.2rem;">🏦</span>
+            <span>Transferencia</span>
+          </div>
+        </div>
+
+        <!-- Tarjeta -->
+        <div id="formCard">
+          <div class="form-group">
+            <label>Número de tarjeta</label>
+            <div style="position:relative;">
+              <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19" oninput="formatCard(this)" style="padding-right:3rem;">
+              <span id="cardBrand" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:1.2rem;"></span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Fecha de vencimiento</label>
+              <input type="text" id="cardExpiry" placeholder="MM/AA" maxlength="5" oninput="formatExpiry(this)">
+            </div>
+            <div class="form-group">
+              <label>CVV</label>
+              <input type="text" id="cardCvv" placeholder="•••" maxlength="4" oninput="this.value=this.value.replace(/\D/g,'')">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Nombre en la tarjeta</label>
+            <input type="text" id="cardName" placeholder="JUAN A GARCIA">
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:1.25rem;font-size:0.75rem;color:var(--text-muted);">
+            🔒 Pago seguro con cifrado SSL de 256 bits
+          </div>
+        </div>
+
+        <!-- Transferencia -->
+        <div id="formTransfer" style="display:none;">
+          <div style="background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:1rem;margin-bottom:1.25rem;">
+            <p style="font-size:0.82rem;font-weight:600;margin-bottom:0.6rem;color:var(--navy);">Datos bancarios BioLab</p>
+            <table style="width:100%;font-size:0.82rem;border-collapse:collapse;">
+              <tr><td style="color:var(--text-muted);padding:3px 0;">Banco</td><td style="font-weight:500;">Banco Industrial</td></tr>
+              <tr><td style="color:var(--text-muted);padding:3px 0;">Cuenta</td><td style="font-weight:500;">001-123456-7</td></tr>
+              <tr><td style="color:var(--text-muted);padding:3px 0;">A nombre de</td><td style="font-weight:500;">BioLab S.A.</td></tr>
+              <tr><td style="color:var(--text-muted);padding:3px 0;">Monto</td><td style="font-weight:600;color:var(--teal-dark);" id="transferAmount"></td></tr>
+            </table>
+          </div>
+          <div class="form-group">
+            <label>No. de boleta / comprobante</label>
+            <input type="text" id="transferRef" placeholder="Ej: 20250601-00123">
+          </div>
+        </div>
+
+        <button class="btn-submit" onclick="processPayment()">Confirmar y pagar →</button>
+      </div>
+
+      <!-- STEP 2: procesando -->
+      <div id="payStep2" style="display:none;text-align:center;padding:2.5rem 1rem;">
+        <div style="font-size:2.5rem;margin-bottom:1rem;" id="paySpinner">⏳</div>
+        <p style="font-weight:500;color:var(--navy);margin-bottom:0.4rem;">Procesando su pago...</p>
+        <p style="font-size:0.83rem;color:var(--text-muted);">Por favor no cierre esta ventana.</p>
+      </div>
+
+      <!-- STEP 3: éxito -->
+      <div id="payStep3" style="display:none;">
+        <div class="success-state">
+          <div class="success-icon">✅</div>
+          <h3>¡Pago confirmado!</h3>
+          <p id="paySuccessMsg">Su solicitud ha sido recibida. Recibirá una confirmación por correo electrónico.</p>
+          <div id="payConfirmBox" style="background:var(--cream);border:1px solid var(--border);border-radius:8px;padding:1rem;margin:1.25rem 0;text-align:left;font-size:0.82rem;"></div>
+          <button class="btn-submit" onclick="closePayModal()" style="max-width:200px;margin:0 auto;display:block;">Cerrar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const exams = [
+  { id: 1, name: 'Hemograma completo', category: 'hematologia', icon: '🩸', price: 85, time: '4-6 horas', desc: 'Análisis completo de células sanguíneas: eritrocitos, leucocitos, plaquetas e índices hematológicos.' },
+  { id: 2, name: 'Glucosa en ayuno', category: 'bioquimica', icon: '🍬', price: 45, time: '2 horas', desc: 'Medición de glucosa en sangre para diagnóstico y control de diabetes.' },
+  { id: 3, name: 'Perfil lipídico', category: 'bioquimica', icon: '💛', price: 120, time: '4 horas', desc: 'Colesterol total, HDL, LDL y triglicéridos para evaluar riesgo cardiovascular.' },
+  { id: 4, name: 'TSH (Tiroides)', category: 'hormonal', icon: '🔵', price: 150, time: '6 horas', desc: 'Hormona estimulante de la tiroides, indicador clave de función tiroidea.' },
+  { id: 5, name: 'PCR Cuantitativa', category: 'molecular', icon: '🧬', price: 280, time: '24 horas', desc: 'Detección y cuantificación molecular mediante reacción en cadena de la polimerasa.' },
+  { id: 6, name: 'Urocultivo', category: 'microbiologia', icon: '🔬', price: 95, time: '48-72 horas', desc: 'Cultivo de orina para identificar microorganismos causantes de infección urinaria.' },
+  { id: 7, name: 'Proteína C Reactiva', category: 'bioquimica', icon: '⚗️', price: 75, time: '3 horas', desc: 'Marcador inflamatorio para detección de infecciones y enfermedades inflamatorias.' },
+  { id: 8, name: 'Perfil hepático', category: 'bioquimica', icon: '🟤', price: 180, time: '4 horas', desc: 'Transaminasas, bilirrubinas, albumina y fosfatasa alcalina para evaluar función hepática.' },
+  { id: 9, name: 'Tiempo de coagulación', category: 'hematologia', icon: '🩺', price: 110, time: '3 horas', desc: 'TP, TPT y fibrinógeno para evaluar la capacidad de coagulación sanguínea.' },
+  { id: 10, name: 'Testosterona total', category: 'hormonal', icon: '🟠', price: 165, time: '6 horas', desc: 'Medición de testosterona sérica para diagnóstico hormonal en hombres y mujeres.' },
+  { id: 11, name: 'Coprocultivo', category: 'microbiologia', icon: '🧫', price: 90, time: '48 horas', desc: 'Cultivo de heces para identificar patógenos gastrointestinales.' },
+  { id: 12, name: 'Panel respiratorio viral', category: 'molecular', icon: '🫁', price: 350, time: '12 horas', desc: 'Detección de influenza A/B, SARS-CoV-2, VRS y otros virus respiratorios por PCR.' },
+];
+
+let cart = [];
+let currentFilter = 'todos';
+let currentSearch = '';
+
+function renderExams() {
+  const grid = document.getElementById('examsGrid');
+  let filtered = exams;
+
+  if (currentFilter !== 'todos') {
+    filtered = filtered.filter(e => e.category === currentFilter);
+  }
+
+  if (currentSearch) {
+    const q = currentSearch.toLowerCase();
+    filtered = filtered.filter(e => e.name.toLowerCase().includes(q) || e.desc.toLowerCase().includes(q));
+  }
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<p style="text-align:center; color:var(--text-muted); grid-column:1/-1; padding:3rem">No se encontraron exámenes para su búsqueda.</p>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(e => {
+    const inCart = cart.find(c => c.id === e.id);
+    return `
+    <div class="exam-card">
+      <div class="exam-top">
+        <div class="exam-category">${catLabel(e.category)}</div>
+        <div class="exam-name">${e.icon} ${e.name}</div>
+        <div class="exam-time">⏱ Resultado en ${e.time}</div>
+      </div>
+      <div class="exam-body">
+        <p class="exam-desc">${e.desc}</p>
+        <div class="exam-footer">
+          <div class="exam-price">Q${e.price}<span>GTQ</span></div>
+          <button class="btn-add ${inCart ? 'added' : ''}" onclick="addToCart(${e.id})">
+            ${inCart ? '✓ Agregado' : '+ Agregar'}
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function catLabel(c) {
+  const map = { hematologia: 'Hematología', bioquimica: 'Bioquímica', hormonal: 'Hormonal', molecular: 'Molecular', microbiologia: 'Microbiología' };
+  return map[c] || c;
+}
+
+function setFilter(btn, cat) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderExams();
+}
+
+function filterExams() {
+  currentSearch = document.getElementById('searchInput').value;
+  renderExams();
+}
+
+function filterByName(name) {
+  document.getElementById('searchInput').value = name;
+  currentSearch = name;
+  renderExams();
+  document.getElementById('examenes').scrollIntoView({ behavior: 'smooth' });
+}
+
+function addToCart(id) {
+  const exam = exams.find(e => e.id === id);
+  if (!cart.find(c => c.id === id)) {
+    cart.push(exam);
+    updateCartUI();
+    showToast(`"${exam.name}" agregado al carrito`);
+    renderExams();
+  } else {
+    showToast('Ya está en su carrito');
+  }
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(c => c.id !== id);
+  updateCartUI();
+  renderCartItems();
+  renderExams();
+}
+
+function clearCart() {
+  cart = [];
+  updateCartUI();
+  renderCartItems();
+  renderExams();
+}
+
+function updateCartUI() {
+  const badge = document.getElementById('cartBadge');
+  badge.textContent = cart.length;
+  badge.style.display = cart.length > 0 ? 'flex' : 'none';
+}
+
+function renderCartItems() {
+  const container = document.getElementById('cartItems');
+  if (cart.length === 0) {
+    container.innerHTML = `<div class="cart-empty"><div style="font-size:2.5rem">🧪</div><p>No hay exámenes en su carrito.</p></div>`;
+    document.getElementById('cartTotal').textContent = 'Q0.00';
+    return;
+  }
+  let total = 0;
+  container.innerHTML = cart.map(e => {
+    total += e.price;
+    return `
+    <div class="cart-item">
+      <div class="cart-item-icon">${e.icon}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${e.name}</div>
+        <div class="cart-item-cat">${catLabel(e.category)}</div>
+      </div>
+      <div class="cart-item-price">Q${e.price}</div>
+      <button class="cart-item-remove" onclick="removeFromCart(${e.id})" title="Eliminar">✕</button>
+    </div>`;
+  }).join('');
+  document.getElementById('cartTotal').textContent = `Q${total}.00`;
+}
+
+function openCart() {
+  renderCartItems();
+  document.getElementById('cartOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCart() {
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('cartOverlay')) closeCart();
+}
+
+function checkout() {
+  if (cart.length === 0) { showToast('Su carrito está vacío'); return; }
+  closeCart();
+  openPayModal();
+}
+
+// ===== PAYMENT MODAL =====
+let payMethod = 'card';
+
+function openPayModal() {
+  // Build order summary
+  let html = '';
+  let total = 0;
+  cart.forEach(e => {
+    total += e.price;
+    html += `<div class="pay-order-row"><span class="name">${e.icon} ${e.name}</span><span class="price">Q${e.price}</span></div>`;
+  });
+  document.getElementById('payOrderSummary').innerHTML = html;
+  document.getElementById('payTotal').textContent = `Q${total}.00`;
+  document.getElementById('transferAmount').textContent = `Q${total}.00 GTQ`;
+  // Reset to step 1
+  showPayStep(1);
+  payMethod = 'card';
+  selectMethod('card');
+  document.getElementById('payModalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePayModal() {
+  document.getElementById('payModalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handlePayOverlay(e) {
+  if (e.target === document.getElementById('payModalOverlay')) closePayModal();
+}
+
+function showPayStep(n) {
+  [1,2,3].forEach(i => {
+    document.getElementById('payStep' + i).style.display = i === n ? 'block' : 'none';
+  });
+  if (n === 1) {
+    document.getElementById('payModalTitle').textContent = 'Completar pedido';
+    document.getElementById('payModalSub').textContent = 'Ingrese sus datos de pago';
+  } else if (n === 2) {
+    document.getElementById('payModalTitle').textContent = 'Procesando pago';
+    document.getElementById('payModalSub').textContent = 'Por favor espere...';
+  } else {
+    document.getElementById('payModalTitle').textContent = '¡Confirmado!';
+    document.getElementById('payModalSub').textContent = 'Su solicitud fue recibida';
+  }
+}
+
+function selectMethod(method) {
+  payMethod = method;
+  document.getElementById('methodCard').classList.toggle('active', method === 'card');
+  document.getElementById('methodTransfer').classList.toggle('active', method === 'transfer');
+  document.getElementById('formCard').style.display = method === 'card' ? 'block' : 'none';
+  document.getElementById('formTransfer').style.display = method === 'transfer' ? 'block' : 'none';
+}
+
+function formatCard(input) {
+  let v = input.value.replace(/\D/g, '').slice(0, 16);
+  input.value = v.replace(/(.{4})/g, '$1 ').trim();
+  const brands = { '4': '💳 Visa', '5': '💳 Mastercard', '3': '💳 Amex', '6': '💳 Discover' };
+  const first = v[0] || '';
+  document.getElementById('cardBrand').textContent = brands[first] ? brands[first].split(' ')[0] : '';
+}
+
+function formatExpiry(input) {
+  let v = input.value.replace(/\D/g, '').slice(0, 4);
+  if (v.length >= 3) v = v.slice(0,2) + '/' + v.slice(2);
+  input.value = v;
+}
+
+function processPayment() {
+  if (payMethod === 'card') {
+    const num = document.getElementById('cardNumber').value.replace(/\s/g,'');
+    const exp = document.getElementById('cardExpiry').value;
+    const cvv = document.getElementById('cardCvv').value;
+    const name = document.getElementById('cardName').value.trim();
+    if (num.length < 13 || num.length > 16) { showToast('Número de tarjeta inválido'); return; }
+    if (!exp.match(/^\d{2}\/\d{2}$/)) { showToast('Fecha de vencimiento inválida (MM/AA)'); return; }
+    if (cvv.length < 3) { showToast('CVV inválido'); return; }
+    if (!name) { showToast('Ingrese el nombre en la tarjeta'); return; }
+    // Validate expiry not in the past
+    const [mm, yy] = exp.split('/').map(Number);
+    const now = new Date(); const nowYY = now.getFullYear() % 100; const nowMM = now.getMonth() + 1;
+    if (yy < nowYY || (yy === nowYY && mm < nowMM)) { showToast('La tarjeta está vencida'); return; }
+  } else {
+    const ref = document.getElementById('transferRef').value.trim();
+    if (!ref) { showToast('Ingrese el número de comprobante'); return; }
+  }
+
+  showPayStep(2);
+  setTimeout(() => {
+    const ref = 'BL-' + Date.now().toString().slice(-8);
+    const total = cart.reduce((s, e) => s + e.price, 0);
+    const method = payMethod === 'card' ? 'Tarjeta de crédito/débito' : 'Transferencia bancaria';
+    document.getElementById('paySuccessMsg').textContent =
+      `Su solicitud ha sido recibida. Recibirá una confirmación al correo registrado.`;
+    document.getElementById('payConfirmBox').innerHTML = `
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;">
+        <span style="color:var(--text-muted);font-size:0.78rem;">N° de pedido</span><span style="font-weight:600;font-size:0.78rem;">${ref}</span>
+        <span style="color:var(--text-muted);font-size:0.78rem;">Total pagado</span><span style="font-weight:600;font-size:0.78rem;">Q${total}.00 GTQ</span>
+        <span style="color:var(--text-muted);font-size:0.78rem;">Método</span><span style="font-size:0.78rem;">${method}</span>
+        <span style="color:var(--text-muted);font-size:0.78rem;">Estado</span><span style="color:#1e7e4a;font-weight:600;font-size:0.78rem;">✓ Confirmado</span>
+      </div>`;
+    showPayStep(3);
+    cart = [];
+    updateCartUI();
+    renderExams();
+  }, 2200);
+}
+
+function openModal(tab) {
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  switchTab(tab || 'login');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleModalOverlay(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+// ===== AUTH SYSTEM =====
+// Users are stored in localStorage as an array under key 'biolab_users'
+// Current session stored under 'biolab_session'
+
+function getUsers() {
+  try { return JSON.parse(localStorage.getItem('biolab_users') || '[]'); } catch { return []; }
+}
+
+function saveUsers(users) {
+  localStorage.setItem('biolab_users', JSON.stringify(users));
+}
+
+function getSession() {
+  try { return JSON.parse(localStorage.getItem('biolab_session') || 'null'); } catch { return null; }
+}
+
+function saveSession(user) {
+  localStorage.setItem('biolab_session', JSON.stringify(user));
+}
+
+function clearSession() {
+  localStorage.removeItem('biolab_session');
+}
+
+function updateNavAuth() {
+  const session = getSession();
+  const loggedOut = document.getElementById('navLoggedOut');
+  const loggedIn  = document.getElementById('navLoggedIn');
+  if (session) {
+    loggedOut.style.display = 'none';
+    loggedIn.style.display  = 'flex';
+    const initials = ((session.nombre||'')[0]||(session.email||'')[0]||'U').toUpperCase();
+    document.getElementById('navAvatar').textContent = initials;
+    document.getElementById('navUserName').textContent = session.nombre ? `${session.nombre} ${session.apellido||''}`.trim() : session.email;
+    document.getElementById('userMenuHeader').innerHTML = `
+      <p style="font-weight:600;color:var(--white);font-size:0.9rem;">${session.nombre ? `${session.nombre} ${session.apellido||''}`.trim() : 'Usuario'}</p>
+      <p style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:2px;">${session.email}</p>`;
+  } else {
+    loggedOut.style.display = 'flex';
+    loggedIn.style.display  = 'none';
+  }
+}
+
+function toggleUserMenu() {
+  const m = document.getElementById('userMenu');
+  m.style.display = m.style.display === 'none' ? 'block' : 'none';
+}
+
+function closeUserMenu() {
+  document.getElementById('userMenu').style.display = 'none';
+}
+
+document.addEventListener('click', e => {
+  const menu = document.getElementById('userMenu');
+  const loggedIn = document.getElementById('navLoggedIn');
+  if (menu && loggedIn && !loggedIn.contains(e.target)) closeUserMenu();
+});
+
+function logout() {
+  clearSession();
+  updateNavAuth();
+  closeUserMenu();
+  showToast('Sesión cerrada correctamente');
+}
+
+function switchTab(tab) {
+  const tabs = ['login', 'register', 'success'];
+  tabs.forEach(t => {
+    const content = document.getElementById('content' + t.charAt(0).toUpperCase() + t.slice(1));
+    if (content) content.classList.remove('active');
+    const btn = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
+    if (btn) btn.classList.remove('active');
+  });
+  const el = document.getElementById('content' + tab.charAt(0).toUpperCase() + tab.slice(1));
+  if (el) el.classList.add('active');
+  const btn = document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1));
+  if (btn) btn.classList.add('active');
+  const tabBar = document.getElementById('authTabs');
+  if (tabBar) tabBar.style.display = (tab === 'success') ? 'none' : 'flex';
+}
+
+function handleLogin() {
+  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pass  = document.getElementById('loginPass').value;
+  const errEl = document.getElementById('loginError');
+  errEl.style.display = 'none';
+
+  if (!email || !pass) { showToast('Complete todos los campos'); return; }
+
+  const users = getUsers();
+  const user  = users.find(u => u.email === email && u.pass === pass);
+
+  if (!user) {
+    errEl.textContent = 'Correo o contraseña incorrectos. Verifique sus datos.';
+    errEl.style.display = 'block';
+    document.getElementById('loginPass').value = '';
+    return;
+  }
+
+  saveSession(user);
+  updateNavAuth();
+  document.getElementById('successTitle').textContent = `¡Bienvenido de vuelta, ${user.nombre || user.email}!`;
+  document.getElementById('successMsg').textContent = `Ha iniciado sesión correctamente. Ya puede ver sus resultados y gestionar sus citas.`;
+  switchTab('success');
+}
+
+function handleRegister() {
+  const nombre   = document.getElementById('regNombre').value.trim();
+  const apellido = document.getElementById('regApellido').value.trim();
+  const email    = document.getElementById('regEmail').value.trim().toLowerCase();
+  const tel      = document.getElementById('regTel').value.trim();
+  const pass     = document.getElementById('regPass').value;
+  const terms    = document.getElementById('regTerms').checked;
+
+  if (!nombre || !apellido || !email || !pass) { showToast('Complete todos los campos requeridos'); return; }
+  if (!email.includes('@') || !email.includes('.')) { showToast('Ingrese un correo válido'); return; }
+  if (pass.length < 6) { showToast('La contraseña debe tener al menos 6 caracteres'); return; }
+  if (!terms) { showToast('Debe aceptar los términos y condiciones'); return; }
+
+  const users = getUsers();
+  if (users.find(u => u.email === email)) {
+    showToast('Ya existe una cuenta con ese correo. Inicie sesión.');
+    switchTab('login');
+    document.getElementById('loginEmail').value = email;
+    return;
+  }
+
+  const newUser = { nombre, apellido, email, tel, pass, creado: new Date().toISOString() };
+  users.push(newUser);
+  saveUsers(users);
+  saveSession(newUser);
+  updateNavAuth();
+
+  document.getElementById('successTitle').textContent = `¡Bienvenido, ${nombre}!`;
+  document.getElementById('successMsg').textContent   = `Su cuenta ha sido creada exitosamente. Recibirá confirmación en ${email}.`;
+  switchTab('success');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+renderExams();
+updateNavAuth();
+
+function playVideo() {
+  document.getElementById('videoThumb').style.display = 'none';
+  document.getElementById('videoFrame').style.display = 'block';
+}
+
+// ===== RESULTADOS DATA =====
+const resultados = [
+  {
+    id: 'BL-2025-0421', paciente: 'María Rodríguez López', fecha: '2025-05-28',
+    examen: 'Hemograma completo', icon: '🩸', estado: 'listo', medico: 'Dr. Carlos Méndez',
+    parametros: [
+      { nombre: 'Hemoglobina', valor: '14.2 g/dL', ref: '12.0–16.0 g/dL', tipo: 'normal' },
+      { nombre: 'Hematocrito', valor: '42%', ref: '37–47%', tipo: 'normal' },
+      { nombre: 'Leucocitos', valor: '11.2 K/µL', ref: '4.5–11.0 K/µL', tipo: 'alto' },
+      { nombre: 'Plaquetas', valor: '245 K/µL', ref: '150–400 K/µL', tipo: 'normal' },
+      { nombre: 'Eritrocitos', valor: '4.8 M/µL', ref: '4.2–5.4 M/µL', tipo: 'normal' },
+      { nombre: 'VCM', valor: '88 fL', ref: '80–100 fL', tipo: 'normal' },
+    ]
+  },
+  {
+    id: 'BL-2025-0422', paciente: 'María Rodríguez López', fecha: '2025-05-28',
+    examen: 'Glucosa en ayuno', icon: '🍬', estado: 'listo', medico: 'Dr. Carlos Méndez',
+    parametros: [
+      { nombre: 'Glucosa', valor: '126 mg/dL', ref: '70–100 mg/dL', tipo: 'alto' },
+      { nombre: 'Insulina basal', valor: '18 µU/mL', ref: '2–25 µU/mL', tipo: 'normal' },
+    ]
+  },
+  {
+    id: 'BL-2025-0398', paciente: 'Juan García Pérez', fecha: '2025-05-22',
+    examen: 'Perfil lipídico', icon: '💛', estado: 'listo', medico: 'Dra. Ana Salazar',
+    parametros: [
+      { nombre: 'Colesterol total', valor: '198 mg/dL', ref: '<200 mg/dL', tipo: 'normal' },
+      { nombre: 'HDL', valor: '45 mg/dL', ref: '>40 mg/dL', tipo: 'normal' },
+      { nombre: 'LDL', valor: '130 mg/dL', ref: '<130 mg/dL', tipo: 'normal' },
+      { nombre: 'Triglicéridos', valor: '210 mg/dL', ref: '<150 mg/dL', tipo: 'alto' },
+    ]
+  },
+  {
+    id: 'BL-2025-0415', paciente: 'Pedro Castillo Ruiz', fecha: '2025-05-26',
+    examen: 'TSH (Tiroides)', icon: '🔵', estado: 'listo', medico: 'Dra. Ana Salazar',
+    parametros: [
+      { nombre: 'TSH', valor: '0.38 mIU/L', ref: '0.40–4.00 mIU/L', tipo: 'bajo' },
+      { nombre: 'T4 libre', valor: '1.6 ng/dL', ref: '0.8–1.8 ng/dL', tipo: 'normal' },
+      { nombre: 'T3 libre', valor: '3.1 pg/mL', ref: '2.3–4.2 pg/mL', tipo: 'normal' },
+    ]
+  },
+  {
+    id: 'BL-2025-0430', paciente: 'Sofía Lima Vásquez', fecha: '2025-05-30',
+    examen: 'PCR Cuantitativa', icon: '🧬', estado: 'proceso', medico: 'Dr. Roberto Fuentes',
+    parametros: []
+  },
+  {
+    id: 'BL-2025-0433', paciente: 'Sofía Lima Vásquez', fecha: '2025-05-30',
+    examen: 'Perfil hepático', icon: '🟤', estado: 'pendiente', medico: 'Dr. Roberto Fuentes',
+    parametros: []
+  },
+  {
+    id: 'BL-2025-0388', paciente: 'Ana Martínez Cruz', fecha: '2025-05-18',
+    examen: 'Proteína C Reactiva', icon: '⚗️', estado: 'listo', medico: 'Dr. Carlos Méndez',
+    parametros: [
+      { nombre: 'PCR', valor: '0.4 mg/L', ref: '<1.0 mg/L', tipo: 'normal' },
+    ]
+  },
+  {
+    id: 'BL-2025-0401', paciente: 'Luis Hernández Gómez', fecha: '2025-05-20',
+    examen: 'Tiempo de coagulación', icon: '🩺', estado: 'listo', medico: 'Dra. Ana Salazar',
+    parametros: [
+      { nombre: 'TP', valor: '12.4 s', ref: '11–13.5 s', tipo: 'normal' },
+      { nombre: 'TPT', valor: '38 s', ref: '25–40 s', tipo: 'normal' },
+      { nombre: 'INR', valor: '1.05', ref: '0.8–1.2', tipo: 'normal' },
+      { nombre: 'Fibrinógeno', valor: '320 mg/dL', ref: '200–400 mg/dL', tipo: 'normal' },
+    ]
+  },
+];
+
+function buscarResultados() {
+  const nombre = document.getElementById('srNombre').value.trim().toLowerCase();
+  const muestra = document.getElementById('srMuestra').value.trim().toLowerCase();
+  const fecha = document.getElementById('srFecha').value;
+
+  if (!nombre && !muestra && !fecha) {
+    showToast('Ingrese al menos un criterio de búsqueda');
+    return;
+  }
+
+  const found = resultados.filter(r => {
+    const matchNombre = !nombre || r.paciente.toLowerCase().includes(nombre);
+    const matchMuestra = !muestra || r.id.toLowerCase().includes(muestra);
+    const matchFecha = !fecha || r.fecha === fecha;
+    return matchNombre && matchMuestra && matchFecha;
+  });
+
+  const wrap = document.getElementById('resultsTableWrap');
+  const list = document.getElementById('resultsList');
+  const noMsg = document.getElementById('noResultsMsg');
+  const count = document.getElementById('resultsCount');
+
+  if (found.length === 0) {
+    wrap.classList.remove('visible');
+    noMsg.classList.add('visible');
+    return;
+  }
+
+  noMsg.classList.remove('visible');
+  wrap.classList.add('visible');
+  count.innerHTML = `Se encontraron <strong>${found.length}</strong> resultado${found.length > 1 ? 's' : ''}.`;
+
+  list.innerHTML = found.map((r, i) => {
+    const statusClass = { listo: 'status-listo', proceso: 'status-proceso', pendiente: 'status-pendiente' }[r.estado];
+    const statusLabel = { listo: '✓ Listo', proceso: '⏳ En proceso', pendiente: '🕐 Pendiente' }[r.estado];
+
+    const paramsHtml = r.parametros.length > 0 ? `
+      <div class="result-detail" id="detail-${i}">
+        <div class="result-detail-grid">
+          ${r.parametros.map(p => `
+            <div class="result-param ${p.tipo}">
+              <div class="result-param-name">${p.nombre}</div>
+              <div class="result-param-value">${p.valor}</div>
+              <div class="result-param-ref">Ref: ${p.ref}</div>
+            </div>`).join('')}
+        </div>
+        <div class="result-actions">
+          <button class="btn-result-action" onclick="showToast('Descargando PDF...')">📄 Descargar PDF</button>
+          <button class="btn-result-action" onclick="showToast('Enviando al correo registrado...')">📧 Enviar por correo</button>
+          <button class="btn-result-action" onclick="showToast('Enlace copiado para compartir...')">🔗 Compartir</button>
+        </div>
+      </div>` : `
+      <div class="result-detail" id="detail-${i}">
+        <p style="font-size:0.85rem; color:rgba(255,255,255,0.35); padding:0.5rem 0;">
+          ${r.estado === 'proceso' ? '⏳ Sus resultados están siendo procesados. Le notificaremos cuando estén listos.' : '🕐 La muestra aún no ha sido procesada. Por favor revise más tarde.'}
+        </p>
+      </div>`;
+
+    return `
+    <div class="result-card">
+      <div class="result-card-header" onclick="toggleDetail(${i})">
+        <div class="result-sample-icon">${r.icon}</div>
+        <div class="result-main">
+          <div class="result-exam-name">${r.examen}</div>
+          <div class="result-patient">👤 ${r.paciente} &nbsp;·&nbsp; 🩺 ${r.medico}</div>
+        </div>
+        <div class="result-meta">
+          <div class="result-meta-val">${r.id}</div>
+          <div class="result-meta-key">N° MUESTRA</div>
+        </div>
+        <div class="result-meta">
+          <div class="result-meta-val">${formatFecha(r.fecha)}</div>
+          <div class="result-meta-key">FECHA</div>
+        </div>
+        <div class="result-status ${statusClass}">${statusLabel}</div>
+        <button class="result-toggle" id="toggle-${i}">▼</button>
+      </div>
+      ${paramsHtml}
+    </div>`;
+  }).join('');
+
+  setTimeout(() => document.getElementById('resultados').scrollIntoView({ behavior: 'smooth' }), 50);
+}
+
+function toggleDetail(i) {
+  const detail = document.getElementById('detail-' + i);
+  const toggle = document.getElementById('toggle-' + i);
+  const isOpen = detail.classList.contains('open');
+  detail.classList.toggle('open', !isOpen);
+  toggle.classList.toggle('open', !isOpen);
+}
+
+function formatFecha(f) {
+  const [y, m, d] = f.split('-');
+  const meses = ['', 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+  return `${d} ${meses[+m]} ${y}`;
+}
+
+// ===== CITAS =====
+const MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const DIAS  = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+let calWeekOffset = 0;
+let citaFechaSeleccionada = null;
+let citaHoraSeleccionada  = null;
+
+// Pre-block some random slots to simulate taken times
+const takenSlots = {};
+
+function getMonday(offset) {
+  const d = new Date();
+  d.setHours(0,0,0,0);
+  const day = d.getDay(); // 0=Sun
+  const diff = (day === 0 ? -6 : 1 - day); // go to monday
+  d.setDate(d.getDate() + diff + offset * 7);
+  return d;
+}
+
+function renderCalendar() {
+  const monday = getMonday(calWeekOffset);
+  const today  = new Date(); today.setHours(0,0,0,0);
+  const fri    = new Date(monday); fri.setDate(fri.getDate() + 4);
+  document.getElementById('calWeekLabel').textContent =
+    `${monday.getDate()} ${MESES[monday.getMonth()]} — ${fri.getDate()} ${MESES[fri.getMonth()]} ${fri.getFullYear()}`;
+
+  let html = '';
+  for (let i = 0; i < 5; i++) {
+    const d = new Date(monday); d.setDate(monday.getDate() + i);
+    const iso = d.toISOString().slice(0,10);
+    const isPast = d < today;
+    const isSelected = iso === citaFechaSeleccionada;
+    html += `<div class="cal-day${isPast?' past':''}${isSelected?' selected':''}" onclick="selectDate('${iso}')">
+      <div class="cal-day-name">${DIAS[d.getDay()]}</div>
+      <div class="cal-day-num">${d.getDate()}</div>
+      <div class="cal-day-month">${MESES[d.getMonth()].slice(0,3)}</div>
+    </div>`;
+  }
+  document.getElementById('calDays').innerHTML = html;
+}
+
+function calPrevWeek() { if (calWeekOffset > 0) { calWeekOffset--; renderCalendar(); } }
+function calNextWeek() { if (calWeekOffset < 8) { calWeekOffset++; renderCalendar(); } }
+
+function selectDate(iso) {
+  citaFechaSeleccionada = iso;
+  citaHoraSeleccionada  = null;
+  renderCalendar();
+  renderSlots(iso);
+}
+
+function renderSlots(iso) {
+  if (!takenSlots[iso]) {
+    // randomly block 3-4 slots per day
+    const all = getAllSlots();
+    const taken = new Set();
+    while (taken.size < 4) taken.add(all[Math.floor(Math.random()*all.length)]);
+    takenSlots[iso] = taken;
+  }
+  const taken = takenSlots[iso];
+  const slots = getAllSlots();
+  document.getElementById('citaSlots').innerHTML = slots.map(s => {
+    const isTaken = taken.has(s);
+    const isSel   = s === citaHoraSeleccionada;
+    return `<button class="slot-btn${isTaken?' taken':''}${isSel?' selected':''}" onclick="selectSlot('${s}')">${s}</button>`;
+  }).join('');
+}
+
+function getAllSlots() {
+  const slots = [];
+  for (let h = 7; h < 16; h++) {
+    slots.push(`${String(h).padStart(2,'0')}:00`);
+    if (h < 15) slots.push(`${String(h).padStart(2,'0')}:30`);
+  }
+  return slots; // 7:00 to 15:30, last entry 15:30 -> exam ends by 4pm
+}
+
+function selectSlot(s) {
+  citaHoraSeleccionada = s;
+  renderSlots(citaFechaSeleccionada);
+}
+
+function citaNextStep(step) {
+  if (step === 1) {
+    const nombre  = document.getElementById('citaNombre').value.trim();
+    const email   = document.getElementById('citaEmail').value.trim();
+    const tel     = document.getElementById('citaTel').value.trim();
+    const examen  = document.getElementById('citaExamen').value;
+    if (!nombre || !email || !tel || !examen) { showToast('Complete todos los campos del paso 1'); return; }
+    unlockStep('citaStep2');
+    renderCalendar();
+    document.getElementById('citaStep2').scrollIntoView({ behavior:'smooth', block:'center' });
+  } else if (step === 2) {
+    if (!citaFechaSeleccionada) { showToast('Seleccione una fecha'); return; }
+    unlockStep('citaStep3');
+    renderSlots(citaFechaSeleccionada);
+    document.getElementById('citaStep3').scrollIntoView({ behavior:'smooth', block:'center' });
+  } else if (step === 3) {
+    if (!citaHoraSeleccionada) { showToast('Seleccione un horario disponible'); return; }
+    const nombre = document.getElementById('citaNombre').value.trim();
+    const email  = document.getElementById('citaEmail').value.trim();
+    const examen = document.getElementById('citaExamen').value;
+    const [yy,mm,dd] = citaFechaSeleccionada.split('-');
+    const fechaStr = `${dd} de ${MESES[+mm-1]} de ${yy}`;
+    const ref = 'CITA-' + Date.now().toString().slice(-6);
+    document.getElementById('citaConfirmBox').innerHTML = `
+      <div class="citas-confirm-row"><span>Paciente</span><span>${nombre}</span></div>
+      <div class="citas-confirm-row"><span>Correo</span><span>${email}</span></div>
+      <div class="citas-confirm-row"><span>Examen</span><span>${examen}</span></div>
+      <div class="citas-confirm-row"><span>Fecha</span><span>${fechaStr}</span></div>
+      <div class="citas-confirm-row"><span>Hora</span><span>${citaHoraSeleccionada}</span></div>
+      <div class="citas-confirm-row"><span>N° de cita</span><span>${ref}</span></div>`;
+    unlockStep('citaStep4');
+    document.getElementById('citaStep4').scrollIntoView({ behavior:'smooth', block:'center' });
+  }
+}
+
+function unlockStep(id) {
+  document.getElementById(id).classList.remove('citas-step-locked');
+  document.getElementById(id).classList.add('unlocked');
+}
+
+function resetCitas() {
+  citaFechaSeleccionada = null;
+  citaHoraSeleccionada  = null;
+  calWeekOffset = 0;
+  ['citaNombre','citaEmail','citaTel','citaObs'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('citaExamen').value = '';
+  ['citaStep2','citaStep3','citaStep4'].forEach(id => {
+    document.getElementById(id).classList.add('citas-step-locked');
+    document.getElementById(id).classList.remove('unlocked');
+  });
+  document.getElementById('citas').scrollIntoView({ behavior:'smooth' });
+}
+
+function openCitasModal() {
+  document.getElementById('citas').scrollIntoView({ behavior:'smooth' });
+}
+
+// ===== CHATBOT =====
+const chatFAQ = [
+
+  // --- PREPARACIÓN ---
+  {
+    category: 'preparacion',
+    keys: ['ayuno','horas','cuántas horas','cuánto tiempo ayuno','en ayunas','necesito ayuno','horas de ayuno'],
+    q: '¿Cuántas horas de ayuno necesito?',
+    a: `Depende del examen que le hayan indicado:<br><br>
+🔴 <strong>12 horas de ayuno</strong> (estricto):<br>
+&nbsp;&nbsp;• Glucosa en ayuno<br>
+&nbsp;&nbsp;• Perfil lipídico (colesterol, triglicéridos)<br>
+&nbsp;&nbsp;• Perfil hepático completo<br>
+&nbsp;&nbsp;• Insulina basal<br><br>
+🟡 <strong>8 horas de ayuno</strong>:<br>
+&nbsp;&nbsp;• Exámenes hormonales (TSH, T3, T4)<br>
+&nbsp;&nbsp;• Ácido úrico, creatinina<br><br>
+🟢 <strong>Sin ayuno necesario</strong>:<br>
+&nbsp;&nbsp;• Hemograma completo<br>
+&nbsp;&nbsp;• PCR, cultivos<br>
+&nbsp;&nbsp;• Pruebas de coagulación<br><br>
+Si tiene duda sobre su examen específico, no dude en consultarnos. ¡Es preferible preguntar antes que llegar sin la preparación correcta!`
+  },
+
+  {
+    category: 'preparacion',
+    keys: ['agua','puedo tomar agua','beber agua','líquidos','tomar agua','sí puedo tomar'],
+    q: '¿Puedo tomar agua antes de los análisis?',
+    a: `<strong>¡Sí puede tomar agua!</strong> 💧 El agua no interfiere con la mayoría de los exámenes de laboratorio.<br><br>
+Lo que <strong>sí puede tomar</strong> durante el ayuno:<br>
+&nbsp;&nbsp;✅ Agua natural (la cantidad que desee)<br><br>
+Lo que <strong>NO debe consumir</strong>:<br>
+&nbsp;&nbsp;❌ Café (con o sin azúcar)<br>
+&nbsp;&nbsp;❌ Jugos de fruta<br>
+&nbsp;&nbsp;❌ Bebidas energéticas o refrescos<br>
+&nbsp;&nbsp;❌ Leche o lácteos<br>
+&nbsp;&nbsp;❌ Chicles o caramelos<br>
+&nbsp;&nbsp;❌ Cigarrillos (pueden alterar algunos valores)<br><br>
+Mantenerse bien hidratado con agua incluso facilita la extracción de sangre. 🩸`
+  },
+
+  {
+    category: 'preparacion',
+    keys: ['orina 24 horas','recolección orina','muestra orina','orina de 24','cómo recolectar orina','recoger orina'],
+    q: '¿Cómo recolecto la muestra de orina de 24 horas?',
+    a: `La recolección de orina de 24 horas requiere seguir estos pasos con cuidado:<br><br>
+<strong>📋 Instrucciones paso a paso:</strong><br><br>
+1️⃣ Al despertar por la mañana, <strong>deseche la primera orina</strong> del día (no la recolecte) y anote la hora exacta.<br><br>
+2️⃣ Durante las siguientes 24 horas, <strong>recolecte TODA la orina</strong> en el recipiente especial que le entregamos, incluyendo la primera del día siguiente a la misma hora.<br><br>
+3️⃣ Guarde el recipiente <strong>en refrigeración</strong> o en un lugar fresco durante todo el proceso.<br><br>
+4️⃣ Al finalizar, <strong>agite suavemente</strong> y traiga el recipiente completo al laboratorio.<br><br>
+⚠️ <strong>Importante:</strong> Si olvida recolectar una micción, deberá reiniciar el proceso al día siguiente. No mezcle papel higiénico ni otros elementos en el recipiente.<br><br>
+Solicite el recipiente adecuado en nuestra recepción o en su visita anterior.`
+  },
+
+  {
+    category: 'preparacion',
+    keys: ['medicamento','pastillas','medicación','tomar medicamentos','puedo tomar mis pastillas','mis medicamentos','anticoagulante','metformina','insulina antes'],
+    q: '¿Puedo tomar mis medicamentos antes de la prueba?',
+    a: `Esta es una de las preguntas más importantes. La respuesta general es:<br><br>
+✅ <strong>En la mayoría de casos SÍ puede tomarlos</strong>, especialmente si son medicamentos crónicos (hipertensión, tiroides, diabetes, etc.).<br><br>
+⚠️ <strong>Sin embargo, hay excepciones importantes:</strong><br>
+&nbsp;&nbsp;• <strong>Insulina:</strong> NO se aplique antes de la toma si va en ayuno, salvo indicación médica<br>
+&nbsp;&nbsp;• <strong>Anticoagulantes (warfarina, sintrom):</strong> Informe siempre al laboratorio<br>
+&nbsp;&nbsp;• <strong>Biotina (vitamina B7):</strong> Suspender 48–72 h antes de pruebas hormonales<br>
+&nbsp;&nbsp;• <strong>Suplementos de hierro:</strong> Puede afectar pruebas de ferritina/hierro sérico<br><br>
+👨‍⚕️ <strong>La regla de oro:</strong> Siempre siga las indicaciones de su médico. Si no tiene indicaciones específicas, consúltenos antes de su cita y le orientamos según el examen solicitado.`
+  },
+
+  // --- RESULTADOS ---
+  {
+    category: 'resultados',
+    keys: ['cuánto tardan','tiempo resultados','listo','cuando están','demora','cuándo entrega','plazo'],
+    q: '¿Cuánto tardan en estar listos mis resultados?',
+    a: `Los tiempos de entrega varían según el tipo de análisis:<br><br>
+⚡ <strong>2–4 horas:</strong> Hemograma, glucosa, creatinina, PCR<br>
+🕐 <strong>4–6 horas:</strong> Perfil lipídico, perfil hepático, coagulación<br>
+🕕 <strong>6–8 horas:</strong> Hormonas (TSH, T3, T4, testosterona, cortisol)<br>
+🌙 <strong>12–24 horas:</strong> PCR molecular, SARS-CoV-2, hepatitis serológica<br>
+📅 <strong>48–72 horas:</strong> Cultivos (urocultivo, coprocultivo, hemocultivo)<br>
+📅 <strong>5–7 días:</strong> Biopsias y citopatología<br><br>
+Recibirá una notificación por <strong>correo electrónico</strong> en cuanto sus resultados estén disponibles. También puede consultarlos en la sección <strong>"Mis Resultados"</strong> de esta página.`
+  },
+
+  {
+    category: 'resultados',
+    keys: ['descargar','descarga','en línea','portal','ver en línea','cómo veo','acceder resultados','consultar resultados'],
+    q: '¿Cómo puedo descargar mis resultados en línea?',
+    a: `Consultar y descargar sus resultados es muy sencillo:<br><br>
+1️⃣ <strong>Cree su cuenta</strong> en BioLab haciendo clic en "Registrarse" en la parte superior de esta página.<br><br>
+2️⃣ Vaya a la sección <strong>"Mis Resultados"</strong> y busque por su nombre, número de muestra o fecha.<br><br>
+3️⃣ Una vez que aparezca su análisis con estado <strong>✓ Listo</strong>, haga clic para expandirlo.<br><br>
+4️⃣ Use los botones de acción para:<br>
+&nbsp;&nbsp;📄 <strong>Descargar PDF</strong> — listo para imprimir o enviar a su médico<br>
+&nbsp;&nbsp;📧 <strong>Enviar a su correo</strong> — copia directa a su bandeja<br>
+&nbsp;&nbsp;🔗 <strong>Compartir</strong> — enlace seguro para enviar a su médico<br><br>
+Si tiene problemas para acceder, llámenos al <strong>(502) 2200-0000</strong>.`
+  },
+
+  {
+    category: 'resultados',
+    keys: ['whatsapp','correo','email','enviar resultados','mandar','compartir','por mensaje'],
+    q: '¿Me pueden enviar los resultados por WhatsApp o correo?',
+    a: `¡Sí, contamos con varias opciones de entrega digital!<br><br>
+📧 <strong>Correo electrónico:</strong> Automáticamente cuando sus resultados estén listos (si tiene cuenta registrada).<br><br>
+📱 <strong>WhatsApp:</strong> Puede solicitarlo en recepción al momento de su toma. Le enviamos el PDF directamente a su número.<br><br>
+🔗 <strong>Enlace seguro:</strong> Desde el portal "Mis Resultados" puede generar un enlace para compartir con su médico.<br><br>
+🖨️ <strong>Impreso en el laboratorio:</strong> Siempre puede retirar su copia física presentando su DPI.<br><br>
+⚠️ Por seguridad y confidencialidad, solo enviamos resultados al número o correo registrado en su expediente.`
+  },
+
+  // --- LOGÍSTICA ---
+  {
+    category: 'logistica',
+    keys: ['horario','horarios','hora','cuándo abren','cuándo cierran','días','atienden','abren','cierran','atención'],
+    q: '¿Cuál es el horario de atención?',
+    a: `Nuestro horario completo es:<br><br>
+🗓️ <strong>Lunes a Viernes:</strong><br>
+&nbsp;&nbsp;• Atención general: <strong>6:00 am – 6:00 pm</strong><br>
+&nbsp;&nbsp;• Toma de muestras con cita: <strong>7:00 am – 4:00 pm</strong><br>
+&nbsp;&nbsp;• Toma sin cita (urgencias): <strong>6:00 am – 5:00 pm</strong><br><br>
+🗓️ <strong>Sábados:</strong><br>
+&nbsp;&nbsp;• Atención general: <strong>7:00 am – 12:00 pm</strong><br>
+&nbsp;&nbsp;• Solo exámenes básicos (no moleculares ni cultivos)<br><br>
+🔴 <strong>Domingos y feriados:</strong> Cerrado<br><br>
+Le recomendamos llegar <strong>con al menos 15 minutos de anticipación</strong> a su cita para el proceso de registro.`
+  },
+
+  {
+    category: 'logistica',
+    keys: ['cita','necesito cita','agendar','reservar','orden de llegada','sin cita','turno','espera'],
+    q: '¿Necesito cita o es por orden de llegada?',
+    a: `Ofrecemos ambas modalidades:<br><br>
+📅 <strong>Con cita previa (recomendado):</strong><br>
+&nbsp;&nbsp;• Sin filas de espera<br>
+&nbsp;&nbsp;• Horario garantizado<br>
+&nbsp;&nbsp;• Prioridad de atención<br>
+&nbsp;&nbsp;• Puede agendar en la sección <strong>"Agendar una cita"</strong> de esta página<br><br>
+🚶 <strong>Sin cita (orden de llegada):</strong><br>
+&nbsp;&nbsp;• Disponible de <strong>6:00 am a 5:00 pm</strong> (L–V)<br>
+&nbsp;&nbsp;• Tiempo de espera estimado: <strong>20–40 minutos</strong> en horas pico<br>
+&nbsp;&nbsp;• Horas pico: 7:00–9:00 am y 12:00–1:00 pm<br><br>
+💡 <strong>Consejo:</strong> Si viene en ayunas, le recomendamos agendar cita temprano para no prolongar el ayuno innecesariamente.`
+  },
+
+  {
+    category: 'logistica',
+    keys: ['domicilio','casa','hogar','toma a domicilio','recolección en casa','enfermera a domicilio','visita a domicilio'],
+    q: '¿Tienen servicio de toma de muestras a domicilio?',
+    a: `¡Sí! Contamos con servicio de <strong>toma de muestra a domicilio</strong> 🏠<br><br>
+<strong>¿Cómo funciona?</strong><br>
+1. Llame al <strong>(502) 2200-0000</strong> o escríbanos para coordinar<br>
+2. Indique su dirección, exámenes solicitados y horario preferido<br>
+3. Nuestro personal de enfermería llega a su hogar en la ventana acordada<br>
+4. La muestra se procesa en nuestro laboratorio con el mismo estándar<br><br>
+📋 <strong>Detalles del servicio:</strong><br>
+&nbsp;&nbsp;• Disponible: <strong>Lunes a Viernes 7:00–11:00 am</strong><br>
+&nbsp;&nbsp;• Cobertura: Ciudad de Guatemala y áreas metropolitanas<br>
+&nbsp;&nbsp;• Costo adicional: Depende de la distancia (consultar)<br>
+&nbsp;&nbsp;• Ideal para: pacientes con movilidad reducida, personas mayores, personas hospitalizadas en casa<br><br>
+📞 Reserve con al menos <strong>24 horas de anticipación</strong>.`
+  },
+
+  {
+    category: 'logistica',
+    keys: ['seguro','aseguradora','obra social','igss','seguros médicos','cobertura','aseguradora','póliza','seguro médico','planes'],
+    q: '¿Qué seguros médicos o aseguradoras aceptan?',
+    a: `Trabajamos con las principales aseguradoras y sistemas de salud:<br><br>
+🏥 <strong>Aseguradoras privadas (cobertura directa):</strong><br>
+&nbsp;&nbsp;• Seguros G&T Continental<br>
+&nbsp;&nbsp;• Columna (Aseguradora Rural)<br>
+&nbsp;&nbsp;• Seguros Universales<br>
+&nbsp;&nbsp;• Pan-American Life Insurance<br>
+&nbsp;&nbsp;• MAPFRE Guatemala<br><br>
+🏛️ <strong>Sistemas públicos:</strong><br>
+&nbsp;&nbsp;• IGSS (con orden médica del IGSS)<br>
+&nbsp;&nbsp;• Ministerio de Salud (con referencia)<br><br>
+💳 <strong>Reembolso:</strong> Para aseguradoras no listadas, emitimos factura oficial y documentación completa para que solicite reembolso con su aseguradora.<br><br>
+📞 Para verificar si su póliza específica tiene convenio directo, llámenos al <strong>(502) 2200-0000</strong> antes de su visita.`
+  },
+
+  // --- EXTRAS útiles ---
+  {
+    category: 'preparacion',
+    keys: ['niño','niños','bebé','pediátrico','menor de edad','hijo','pediatría','pequeño'],
+    q: '¿Atienden pacientes pediátricos?',
+    a: `¡Sí! Tenemos personal especializado en toma de muestras pediátricas. 👶<br><br>
+<strong>Para niños de 0–5 años:</strong><br>
+&nbsp;&nbsp;• Extracción con agujas especiales calibre fino<br>
+&nbsp;&nbsp;• Técnico pediátrico certificado<br>
+&nbsp;&nbsp;• Ambiente amigable para reducir el estrés del menor<br><br>
+<strong>Requisitos:</strong><br>
+&nbsp;&nbsp;• Presencia obligatoria de padre, madre o tutor legal<br>
+&nbsp;&nbsp;• Traer DPI del adulto y partida de nacimiento del menor<br>
+&nbsp;&nbsp;• Si el niño requiere ayuno, consulte con su pediatra la cantidad de tiempo adecuada<br><br>
+💡 <strong>Consejo:</strong> Programe la cita para las primeras horas de la mañana para que el ayuno del niño sea el del sueño nocturno y cause el menor malestar posible.`
+  },
+
+  {
+    category: 'resultados',
+    keys: ['interpretar','qué significa','valores','referencia','fuera de rango','alto','bajo','resultado alterado','normal','anormal'],
+    q: '¿Cómo interpreto mis resultados?',
+    a: `Sus resultados incluyen siempre los <strong>valores de referencia</strong> para que pueda comparar. Sin embargo:<br><br>
+⚠️ <strong>Solo su médico puede interpretar clínicamente sus resultados</strong>, ya que los valores normales varían según edad, sexo, medicamentos y condición clínica.<br><br>
+En nuestra plataforma los resultados se muestran con colores indicativos:<br>
+&nbsp;&nbsp;🟢 <strong>Verde:</strong> Dentro del rango de referencia<br>
+&nbsp;&nbsp;🔴 <strong>Rojo:</strong> Por encima del rango (alto)<br>
+&nbsp;&nbsp;🟡 <strong>Amarillo:</strong> Por debajo del rango (bajo)<br><br>
+Un valor fuera de rango <strong>no siempre significa enfermedad</strong>. Factores como el ejercicio reciente, el estrés o la hidratación pueden influir.<br><br>
+Si tiene dudas sobre un resultado, le recomendamos consultar con su médico tratante.`
+  },
+
+  {
+    category: 'logistica',
+    keys: ['precio','costo','cuánto cuesta','tarifa','valor','cobran','pagar','precios'],
+    q: '¿Cuánto cuestan los exámenes?',
+    a: `Nuestros precios son accesibles y transparentes:<br><br>
+💰 <strong>Exámenes básicos:</strong> desde <strong>Q45</strong> (glucosa, orina)<br>
+💰 <strong>Hemograma completo:</strong> <strong>Q85</strong><br>
+💰 <strong>Perfiles (lipídico, hepático):</strong> <strong>Q120–Q180</strong><br>
+💰 <strong>Hormonales:</strong> <strong>Q150–Q165</strong><br>
+💰 <strong>PCR / Moleculares:</strong> <strong>Q280–Q350</strong><br><br>
+Puede ver el precio exacto de cada examen en nuestra sección <strong>"Exámenes disponibles"</strong>.<br><br>
+💳 <strong>Formas de pago:</strong> Efectivo, tarjeta de crédito/débito, transferencia bancaria.<br><br>
+🏷️ Ofrecemos descuentos para pacientes con múltiples exámenes, adultos mayores y afiliados a seguros con convenio.`
+  },
+];
+
+let chatOpen = false;
+let chatInitialized = false;
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  document.getElementById('chatWindow').classList.toggle('open', chatOpen);
+  document.getElementById('chatUnread').style.display = 'none';
+  if (chatOpen && !chatInitialized) { initChat(); chatInitialized = true; }
+}
+
+function initChat() {
+  addBotMsg('¡Hola! 👋 Soy <strong>BioBot</strong>, el asistente de BioLab. Estoy aquí para resolver sus dudas sobre preparación para exámenes, resultados y servicios.');
+  setTimeout(() => {
+    addBotMsg('¿Sobre qué le gustaría saber? Puede escribir su pregunta o elegir una categoría:');
+    renderCategoryBtns();
+  }, 800);
+}
+
+function renderCategoryBtns() {
+  document.getElementById('chatQuickBtns').innerHTML = `
+    <button class="chat-quick" onclick="showCategory('preparacion')">🧪 Preparación</button>
+    <button class="chat-quick" onclick="showCategory('resultados')">📋 Resultados</button>
+    <button class="chat-quick" onclick="showCategory('logistica')">📅 Servicios</button>
+  `;
+}
+
+function showCategory(cat) {
+  document.getElementById('chatQuickBtns').innerHTML = '';
+  const labels = { preparacion: 'Preparación', resultados: 'Resultados', logistica: 'Servicios y logística' };
+  appendMsg('user', `Ver preguntas de ${labels[cat]}`);
+  const faqs = chatFAQ.filter(f => f.category === cat);
+  addBotMsg(`Estas son las preguntas frecuentes sobre <strong>${labels[cat]}</strong>:`, 400);
+  setTimeout(() => {
+    document.getElementById('chatQuickBtns').innerHTML =
+      faqs.map(f => `<button class="chat-quick" onclick="answerFaq(${chatFAQ.indexOf(f)})">${f.q}</button>`).join('') +
+      `<button class="chat-quick" style="background:var(--cream-dark);border-color:var(--border);color:var(--text-muted);" onclick="backToCategories()">← Volver</button>`;
+  }, 600);
+}
+
+function backToCategories() {
+  document.getElementById('chatQuickBtns').innerHTML = '';
+  addBotMsg('¿En qué otra categoría puedo ayudarle?', 200);
+  setTimeout(renderCategoryBtns, 500);
+}
+
+function answerFaq(index) {
+  document.getElementById('chatQuickBtns').innerHTML = '';
+  const faq = chatFAQ[index];
+  appendMsg('user', faq.q);
+  addBotMsg(faq.a, 600);
+  setTimeout(() => {
+    document.getElementById('chatQuickBtns').innerHTML = `
+      <button class="chat-quick" onclick="backToCategories()">← Más preguntas</button>
+      <button class="chat-quick" onclick="goToCitas()">📅 Agendar cita</button>
+      <button class="chat-quick" onclick="callUs()">📞 Llamarnos</button>
+    `;
+  }, 1400);
+}
+
+function addBotMsg(text, delay = 0) {
+  const container = document.getElementById('chatMessages');
+  if (delay > 0) {
+    const typing = document.createElement('div');
+    typing.className = 'chat-msg typing'; typing.id = 'chatTyping'; typing.textContent = '• • •';
+    container.appendChild(typing);
+    scrollChat();
+    setTimeout(() => {
+      document.getElementById('chatTyping')?.remove();
+      appendMsg('bot', text);
+    }, delay);
+  } else {
+    appendMsg('bot', text);
+  }
+}
+
+function appendMsg(type, text) {
+  const container = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = `chat-msg ${type}`;
+  div.innerHTML = text;
+  container.appendChild(div);
+  scrollChat();
+}
+
+function scrollChat() {
+  const c = document.getElementById('chatMessages');
+  setTimeout(() => c.scrollTop = c.scrollHeight, 50);
+}
+
+function sendChatMsg() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  document.getElementById('chatQuickBtns').innerHTML = '';
+  appendMsg('user', text);
+  processMsg(text);
+}
+
+function processMsg(text) {
+  const lower = text.toLowerCase();
+
+  if (/^(hola|buenas|saludos|buenos|hi|hello)/.test(lower)) {
+    addBotMsg('¡Hola! 😊 Con gusto le ayudo. Elija una categoría o escriba su pregunta:', 400);
+    setTimeout(renderCategoryBtns, 700);
+    return;
+  }
+
+  if (/gracias|muchas gracias|perfecto|excelente|muy bien|ok gracias/.test(lower)) {
+    addBotMsg('¡De nada! Si tiene más preguntas, aquí estaré. 😊', 400);
+    setTimeout(renderCategoryBtns, 800);
+    return;
+  }
+
+  let match = null;
+  let bestScore = 0;
+  for (const faq of chatFAQ) {
+    const score = faq.keys.filter(k => lower.includes(k)).length;
+    if (score > bestScore) { bestScore = score; match = faq; }
+  }
+
+  if (match && bestScore > 0) {
+    addBotMsg(match.a, 600);
+    setTimeout(() => {
+      document.getElementById('chatQuickBtns').innerHTML = `
+        <button class="chat-quick" onclick="backToCategories()">← Más preguntas</button>
+        <button class="chat-quick" onclick="goToCitas()">📅 Agendar cita</button>
+        <button class="chat-quick" onclick="callUs()">📞 Llamarnos</button>
+      `;
+    }, 1400);
+    return;
+  }
+
+  if (/agendar|cita|turno|reservar/.test(lower)) { goToCitas(); return; }
+  if (/examen|catálogo|análisis|ver examen/.test(lower)) {
+    addBotMsg('Le llevo a nuestro catálogo de exámenes 🔬', 400);
+    setTimeout(() => document.getElementById('examenes').scrollIntoView({ behavior:'smooth' }), 1000);
+    return;
+  }
+  if (/llamar|teléfono|contacto|comunicar/.test(lower)) { callUs(); return; }
+
+  addBotMsg('No encontré una respuesta exacta. Intente con estas categorías:', 500);
+  setTimeout(renderCategoryBtns, 900);
+}
+
+function goToCitas() {
+  addBotMsg('Le llevo a la sección de citas. 📅', 300);
+  setTimeout(() => document.getElementById('citas').scrollIntoView({ behavior:'smooth' }), 900);
+}
+
+function callUs() {
+  addBotMsg('Puede contactarnos directamente:<br>📞 <strong>(502) 2200-0000</strong><br>✉️ <strong>info@biolab.gt</strong><br><br>Horario: Lunes a Viernes 7:00 am – 5:00 pm.', 400);
+}
+</script>
 </body>
 </html>
